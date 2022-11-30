@@ -9,7 +9,7 @@ import { Article } from '@/components/Article'
 import { Quotes } from '@/components/Quotes'
 import LinkedIn from '@/images/linkedin.svg'
 import { Hero } from '@/components/Hero'
-import { generateRssFeed } from '@/lib/generateRssFeed'
+// import { generateRssFeed } from '@/lib/generateRssFeed'
 import { getAllArticles } from '@/lib/getAllArticles'
 import { SimpleLayout } from '@/components/SimpleLayout'
 import { getReposFlat, repoUrls } from '@/lib/query'
@@ -50,9 +50,9 @@ export default function Home({ articles, repos }) {
 }
 
 export async function getStaticProps() {
-  if (process.env.NODE_ENV === 'production') {
-    await generateRssFeed()
-  }
+  //   if (process.env.NODE_ENV === 'production') {
+  //     await generateRssFeed()
+  //   }
   const repos = await getReposFlat(repoUrls)
   return {
     props: {
