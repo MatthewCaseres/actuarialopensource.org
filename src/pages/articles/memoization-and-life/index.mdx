@@ -1,0 +1,183 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+import Image from 'next/future/image'
+import dpGif from './dp-gif.gif'
+import spreadsheetRecursion from './spreadsheet-recursion.png'
+
+export const meta = {
+  author: 'Matthew Caseres',
+  date: '2022-11-29',
+  title: 'Memoization and life actuarial software',
+  description:
+    'We discuss memoization and how it speeds up life actuarial software. Also, what is life actuarial software?',
+}
+
+export default (props) => <ArticleLayout meta={meta} {...props} />
+
+Memoization is storing the results of functions to avoid recomputing them later on. It is often used to speed up recursive calculations. Let's do a simple calculation to see how it works.
+
+> A person dies with probability $\frac{t}{100}$ each year and the interest rate is $r = .02$. Calculate the present value of receiving $1$ dollar at the beginning of each year for $n$ years, also known as an annuity due.
+
+## Recursion with no cache
+
+In the code below, `annuity_no_cache` calculates the present value of the annuity without caching the results of the recursion.
+
+```py
+PRINT=True
+
+def q(t):
+    return t/100
+
+def pols_if(t):
+    if PRINT == True: # to toggle printing
+        print(f"pols_if({t})")
+    if t == 0:
+        return 1
+    return (1 - q(t)) * pols_if(t-1)
+
+v = (1/1.02)
+
+def annuity_no_cache(n):
+    """Present value of death benefits up to limit"""
+    return sum(pols_if(t)*v**t for t in range(n))
+```
+
+Run the function.
+
+```py
+annuity_no_cache(5)
+```
+
+See that it is recomputing the same values over and over again.
+
+```
+pols_if(0)
+pols_if(1)
+pols_if(0)
+pols_if(2)
+pols_if(1)
+pols_if(0)
+pols_if(3)
+pols_if(2)
+pols_if(1)
+pols_if(0)
+pols_if(4)
+pols_if(3)
+pols_if(2)
+pols_if(1)
+pols_if(0)
+```
+
+`pols_if(0)` is called 5 times, since the recursion must hit the base case before returning, and we call the function 5 times. `pols_if(1)` is called 4 times, `pols_if(2)` is called 3 times, and so on.
+
+Overall `annuity_no_cache(n)` calls `pols_if` $1+2+...+n$ times, giving it a time complexity of $O(n^2)$. The space complexity is $O(n)$ due to the stack space used in recursive calls.
+
+## Recursion with cache
+
+The `@cache` decorator makes it so that if the value of a function call has been computed once, it will be stored and used again. So `pols_if(1)` will only call `pols_if(0)` once and then the next time `pols_if(1)` is called, the stored value will be used and `pols_if(0)` will not be called again.
+
+```py
+from functools import cache
+
+@cache
+def pols_if_cache(t):
+    if PRINT == True:
+        print("pols_if", t)
+    if t == 0:
+        return 1
+    return (1 - q(t)) * pols_if_cache(t-1)
+
+def annuity_cache(n):
+    """Present value of death benefits up to n"""
+    return sum(pols_if_cache(t)*v**t for t in range(n))
+```
+
+Call the function.
+
+```py
+annuity_cache(5)
+```
+
+`pols_if_cache` is only called once for each value of `t`.
+
+```
+pols_if 0
+pols_if 1
+pols_if 2
+pols_if 3
+pols_if 4
+```
+
+This gives `annuity_cache` a time complexity of $O(n)$. The space complexity is $O(n)$ due to the values in the cache.
+
+## Recursion with LRU cache
+
+The `@lru_cache` decorator is similar to `@cache`, but it has a limit on the number of values it can store. If the limit is reached, the least recently used value is removed from the cache. This is useful if you don't want to store all the values in the cache.
+
+```py
+from functools import lru_cache
+
+@lru_cache(maxsize=1)
+def pols_if_lru1(t):
+    if PRINT == True:
+        print(f"pols_if({t})")
+    if t == 0:
+        return 1
+    return (1 - q(t)) * pols_if_lru1(t-1)
+
+def annuity_lru1(n):
+    """Present value of death benefits up to n"""
+    return sum(pols_if_lru1(t)*v**t for t in range(n))
+```
+
+Call the function.
+
+```py
+annuity_lru1(5)
+```
+
+See that `pols_if_lru1` is only called once for each value of `t`.
+
+```
+pols_if(0)
+pols_if(1)
+pols_if(2)
+pols_if(3)
+pols_if(4)
+```
+
+The time complexity is $O(n)$, but the space complexity is $O(1)$ since only one value is stored in the cache. Here is an animation showing the difference between the regular cache and the LRU cache.
+
+<Image src={dpGif} alt="" />
+
+For larger objects the benefits of the LRU cache are more apparent. If we had 1,000,000 64-bit floating point values then the LRU cache would use $1,000,000 \times 64 \text{ bits} = 8 \text{ megabytes}$ no matter how many timesteps there were. But if we ran a monthly simulation for 100 years, then there are 1200 timesteps, and caching every value (no LRU) would use $1,000,000 \times 1200 \times 64 \text{ bits} = 9.6 \text{ gigabytes}$.
+
+Issues related to this have come up in the past, see [this post from the modelx blog](https://modelx.io/blog/2022/03/26/running-model-while-saving-memory/).
+
+## Is recursion with memoization really necessary here?
+
+We could also do something like `np.cumprod(1-q)`, but actuarial calculations are generally a bit more complex than the example given. We discuss recursion with memoization because it is a general approach that is easy to code. Which is probably why actuarial software has users define functions recursively.
+
+## Actuarial software
+
+Life actuaries perform recursive calculations inside custom development with built-in memoization, one example of open source actuarial modeling software is [modelx](https://docs.modelx.io/en/latest/).
+
+> modelx is a numerical computing tool that enables you to use Python like a spreadsheet by quickly defining cached functions. modelx is best suited for implementing mathematical models expressed in a large system of recursive formulas, in such fields as actuarial science, quantitative finance and risk management. - _modelx documentation_
+
+There is a modelx plugin for the Spyder IDE which provides features not normally seen in environments like VS Code, like a dependency graph of the function calls. The modelx blog has posts arguing that its system is better than just using Python for these types of calculations.
+
+- [Why Excel is better than Python](https://modelx.io/blog/2022/03/06/why-excel-is-better-than-python/)
+- [Why you should use modelx](https://modelx.io/blog/2022/10/29/why-you-should-use-modelx/)
+
+## Microsoft Excel and Recursion
+
+Considering that "Use Python like a spreadsheet!" is the slogan of modelx, I thought it worth noting that some computer science professors advocate for teaching dynamic programming through the use of spreadsheets ([Dynamic programming from an Excel perspective](https://www.researchgate.net/publication/262281816_Dynamic_programming_from_an_excel_perspective)). For context, dynamic programming problems are often solved via recursion with memoization. People sometimes argue about what is/isn't dynamic programming so I've refrained from using the term to describe the previous annuity calculation.
+
+Here is a spreadsheet easily calculating `pols_if` from our example.
+
+<Image src={spreadsheetRecursion} alt="" />
+
+The spreadsheet is a bit simpler than the Python code, but generally actuaries want to do this calculation for a large number of policies and spreadsheets are not designed for this.
+
+## Thanks for reading
+
+The computations surrounding the actuarial profession haven't received much attention from a computer science perspective. I think it's just that the actuarial profession is a small niche and there aren't many people who are interested in both actuarial science and computer science. Luckily, there is a LinkedIn group for the [Actuarial Open Source Community](https://www.linkedin.com/groups/13937070/).
