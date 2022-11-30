@@ -57,7 +57,7 @@ function getOwnerRepoFromUrl(url: string) {
 async function getRepoInfo(url: string) {
   const { owner, repo } = getOwnerRepoFromUrl(url)
   const octokit = new Octokit({
-    auth: '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',
+    auth: process.env.GH_TOKEN,
   })
   const repoInfo = await octokit.graphql(
     `
