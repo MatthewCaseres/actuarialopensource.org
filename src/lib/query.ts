@@ -89,7 +89,7 @@ async function getRepoInfo(url: string) {
       owner: owner,
       repo: repo,
       headers: {
-        authorization: `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`,
+        authorization: process.env.GH_TOKEN,
       },
     }
   )
