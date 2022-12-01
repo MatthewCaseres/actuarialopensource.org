@@ -22,14 +22,11 @@ Memoization is storing the results of functions to avoid recomputing them later 
 In the code below, `annuity_no_cache` calculates the present value of the annuity without caching the results of the recursion.
 
 ```py
-PRINT=True
-
 def q(t):
     return t/100
 
 def pols_if(t):
-    if PRINT == True: # to toggle printing
-        print(f"pols_if({t})")
+    print(f"pols_if({t})")
     if t == 0:
         return 1
     return (1 - q(t)) * pols_if(t-1)
@@ -80,8 +77,7 @@ from functools import cache
 
 @cache
 def pols_if_cache(t):
-    if PRINT == True:
-        print("pols_if", t)
+    print("pols_if", t)
     if t == 0:
         return 1
     return (1 - q(t)) * pols_if_cache(t-1)
@@ -118,8 +114,7 @@ from functools import lru_cache
 
 @lru_cache(maxsize=1)
 def pols_if_lru1(t):
-    if PRINT == True:
-        print(f"pols_if({t})")
+    print(f"pols_if({t})")
     if t == 0:
         return 1
     return (1 - q(t)) * pols_if_lru1(t-1)
