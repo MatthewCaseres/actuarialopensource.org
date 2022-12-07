@@ -109,7 +109,7 @@ export const repoUrls: string[] = [
   'https://github.com/JuliaActuary/LifeContingencies.jl',
   'https://github.com/JuliaActuary/EconomicScenarioGenerators.jl',
   'https://github.com/JuliaActuary/ActuaryUtilities.jl',
-  'https://github.com/JuliaActuary/Yields.jl',
+  'https://github.com/OasisLMF/OasisLMF',
   'https://github.com/casact/FASLR',
   'https://github.com/JuliaActuary/Learn',
   'https://github.com/casact/chainladder-python',
