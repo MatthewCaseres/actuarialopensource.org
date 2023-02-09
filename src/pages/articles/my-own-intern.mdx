@@ -1,0 +1,43 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+
+export const meta = {
+  author: 'Matthew Caseres',
+  date: '2023-02-09',
+  title: 'Being my own intern',
+  description:
+    'Trying to make an internship program for actuarial students was a mistake',
+}
+
+export default (props) => <ArticleLayout meta={meta} {...props} />
+
+I put 5,000 USD into an account to fund an internship for actuarial students to write open source software.
+I no longer have the income that I had when I made this decision, and will have to be my own intern.
+I am willing to work for 10 USD per hour, less than the planned 20 USD per hour for an intern.
+
+500 USD will be billed for work done by myself up to this point in time. Here are some projects I have done:
+
+* Building this website
+  * The LinkedIn group is not discoverable on search engines
+  * This website is ranked #1 for searches on Google and Bing queries like "Open Source Actuary"
+* Pymort
+  * Python users have an interface to interact with mortality tables from the SOA
+* Benchmarks
+  * Benchmarks now run and report results automatically using GitHub Actions
+
+The challenge is now creating some impact with the remaining 450 hours billable hours.
+
+## What is the goal?
+
+Very few actuarial publications are reproducible. There are some reasons for this:
+
+* No open data sets
+* Proprietary modeling platforms
+* Marketing material about the capabilities of a consultancy are often favored over knowledge sharing
+* Interests of academia are not fully aligned with the operational realities of actuarial departments
+* Microsoft Excel
+
+The things in the above bullet points are not some great evil, they are just the way that the world works. 
+If we want to see change we will have to do an honest effort at creating reproducible research, 
+and then we can see if anyone wants to join us.
+
+Specifically, we need to build a data simulator. Then we need to see if anyone will use the simulated data. 
