@@ -107,7 +107,7 @@ export async function getReposFlat(urls: string[]) {
 
 export const repoUrls: string[] = [
   'https://github.com/JuliaActuary/LifeContingencies.jl',
-  'https://github.com/JuliaActuary/EconomicScenarioGenerators.jl',
+  'https://github.com/lrnv/Copulas.jl',
   'https://github.com/JuliaActuary/ActuaryUtilities.jl',
   'https://github.com/OasisLMF/OasisLMF',
   'https://github.com/casact/FASLR',
