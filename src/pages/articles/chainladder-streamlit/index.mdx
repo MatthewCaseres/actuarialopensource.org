@@ -1,0 +1,193 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+import Image from 'next/future/image'
+
+export const meta = {
+  author: 'Matthew Caseres',
+  date: '2023-04-25',
+  title: 'Hosting chainladder-python on Streamlit',
+  description:
+    'We talk about deploying a Streamlit app with triangles from Chainladder',
+}
+
+export default (props) => <ArticleLayout meta={meta} {...props} />
+
+## Introduction
+
+### Hosting Streamlit apps in Python
+
+* The easy way: Streamlit community cloud.
+* The general solution: Publish a docker image and run the container somewhere.
+
+We focus more on the general solution.
+
+### Chainladder
+
+* I don't know much about casualty actuarial work so I will not be able to discuss the meaning behind what we are doing in this blog post. 
+* I do know that the Casualty Actuarial Society has published a library for making triangles that has become the most starred actuarial GitHub repository in history.
+
+So let's make some triangles.
+
+## The code
+
+* `@st.cache_data` caches the data when we load it so that the application can refresh without reloading the data.
+* Streamlit will output any lines that are just expressions, like a single line that just says `triangle`. 
+* `@st.cache_data` caches the data when we load it so that the application can refresh without reloading the data.
+* `lob = st.selectbox("Line of Business", clrd.index)` creates a selection box with labels that come from a [list-like thing](https://docs.streamlit.io/library/api-reference/widgets/st.selectbox).
+    * The choice from the selection box is stored as `lob`
+    * This variable can be referenced, like in `st.markdown("This is a triangle for " + lob + " and " + column + ".")`
+
+```py
+import streamlit as st
+import pandas as pd
+import chainladder as cl
+
+st.markdown("# Hosting actuarial dashboards in Streamlit")
+st.markdown("Here is the top 10 rows from a big rectangle of data. We want to get triangles from this rectangle.")
+n=10
+@st.cache_data(ttl=3600*10)
+def get_data():
+    return pd.read_csv(
+        "https://raw.githubusercontent.com/casact/chainladder-python/master/chainladder/utils/data/clrd.csv"
+    )
+clrd_df = get_data()
+clrd_df_head = clrd_df.head(n)
+clrd_df_head
+st.markdown("""Casualty actuaries create reports with \"loss triangles\". 
+For the triangles we use the [chainladder-python](https://chainladder-python.readthedocs.io/en/latest/intro.html) package. This package is published by the Casualty Actuarial Society and is
+the [most popular open source actuarial project ever](https://www.actuarialopensource.org/).""")
+st.markdown("""We host the loss triangles on the web using streamlit, the [most popular open source python package for hosting dashboards](https://star-history.com/#streamlit/streamlit&plotly/dash&rstudio/shiny&Date).""")
+
+clrd = cl.Triangle(
+    clrd_df,
+    origin="AccidentYear",
+    development="DevelopmentYear",
+    columns=[
+        "IncurLoss",
+        "CumPaidLoss",
+        "BulkLoss",
+        "EarnedPremDIR",
+        "EarnedPremCeded",
+        "EarnedPremNet",
+    ],
+    index="LOB",
+    cumulative=True,
+)
+
+st.write("Selectors")
+
+lob = st.selectbox("Line of Business", clrd.index)
+
+column = st.selectbox("Type", clrd.columns)
+
+triangle = clrd.loc[lob, column]
+
+st.markdown("This is a triangle for " + lob + " and " + column + ".")
+
+triangle
+
+st.markdown("This is a heatmap of the link ratio.")
+
+st.write(triangle.link_ratio.heatmap())
+```
+
+You should be able to get this code to run if you have Python and `requirements.txt` installed.
+
+```
+chainladder==0.8.15
+streamlit==1.21.0
+pandas==1.5.3
+IPython==8.12.0
+```
+
+## The Dockerfile
+
+The Dockerfile is instructions to set up the machine and run the software.
+This Dockerfile is mostly copied from [docs.streamlit.io](https://docs.streamlit.io/knowledge-base/tutorials/deploy/docker).
+
+```
+# app/Dockerfile
+
+FROM python:3.9-slim
+
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    curl \
+    software-properties-common \
+    git \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY . .
+
+RUN pip3 install -r requirements.txt
+
+EXPOSE 8501
+
+HEALTHCHECK CMD curl --fail http://localhost:8501/_stcore/health
+
+ENTRYPOINT ["streamlit", "run", "main.py", "--server.port=8501", "--server.address=0.0.0.0"]
+```
+
+## Deployment
+
+There are many ways to deploy a thing. We will be using **GitHub actions** to automate the building and pushing of Docker images to **DockerHub** before deploying to **Azure Container Instances**.
+
+* GitHub actions: Like BitBucket Pipelines, Jenkins, GitLab CI/CD, TeamCity, etc.
+* DockerHub: Like GitHub/Amazon/Google/Microsoft's container registry. Or you could host your own registry.
+* Azure Container Instances: Like Amazon ECS, Google Cloud Run, Kubernetes, or anything with Docker installed.
+
+The GitHub Actions say what you need to know. The benefit of Infrastructure as Code (IaC) is that you don't need to maintain a word document that says which buttons to press. 
+The behavior of the deployment is defined by a text file that lives in a Git repository.
+
+```yaml
+name: Publish Docker image
+
+on:
+  push:
+
+jobs:
+  push_to_registry:
+    name: Push Docker image to Docker Hub
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v3
+      
+      - name: Log in to Docker Hub
+        uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
+        with:
+          images: actuarial/streamlit-chainladder
+      - name: Build and push Docker images
+        uses: docker/build-push-action@v4.0.0  
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          platforms: linux/amd64
+      - name: 'Login via Azure CLI'
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+      - name: Deploy to Azure Container Services
+        uses: 'azure/aci-deploy@v1'
+        with:
+          resource-group: my-resource-group
+          dns-name-label: streamlit-chainladder-dns-name-label
+          image: docker.io/actuarial/streamlit-chainladder:main
+          name: streamlit-chainladder-name
+          location: 'central us'
+          ports: 8501
+```
+
+## Finished
+
+* Visit the app at http://streamlit-chainladder-dns-name-label.centralus.azurecontainer.io:8501/. 
+* Source code here - https://github.com/MatthewCaseres/streamlit-chainladder.
