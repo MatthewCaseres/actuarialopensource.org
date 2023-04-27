@@ -31,7 +31,6 @@ So let's make some triangles.
 
 * `@st.cache_data` caches the data when we load it so that the application can refresh without reloading the data.
 * Streamlit will output any lines that are just expressions, like a single line that just says `triangle`. 
-* `@st.cache_data` caches the data when we load it so that the application can refresh without reloading the data.
 * `lob = st.selectbox("Line of Business", clrd.index)` creates a selection box with labels that come from a [list-like thing](https://docs.streamlit.io/library/api-reference/widgets/st.selectbox).
     * The choice from the selection box is stored as `lob`
     * This variable can be referenced, like in `st.markdown("This is a triangle for " + lob + " and " + column + ".")`
@@ -137,7 +136,7 @@ There are many ways to deploy a thing. We will be using **GitHub actions** to au
 * DockerHub: Like GitHub/Amazon/Google/Microsoft's container registry. Or you could host your own registry.
 * Azure Container Instances: Like Amazon ECS, Google Cloud Run, Kubernetes, or anything with Docker installed.
 
-The GitHub Actions say what you need to know. The benefit of Infrastructure as Code (IaC) is that you don't need to maintain a word document that says which buttons to press. 
+The benefit of Infrastructure as Code (IaC) is that you don't need to maintain a word document that says which buttons to press. 
 The behavior of the deployment is defined by a text file that lives in a Git repository.
 
 ```yaml
