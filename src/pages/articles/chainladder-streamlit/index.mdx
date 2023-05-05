@@ -1,5 +1,5 @@
-import { ArticleLayout } from '@/components/ArticleLayout'
 import Image from 'next/future/image'
+import SidebarLayout from '@/components/Sidebar/SidebarLayout'
 
 export const meta = {
   author: 'Matthew Caseres',
@@ -9,31 +9,31 @@ export const meta = {
     'We talk about deploying a Streamlit app with triangles from Chainladder',
 }
 
-export default (props) => <ArticleLayout meta={meta} {...props} />
+export default (props) => <SidebarLayout {...props} />
 
-## Introduction
+# Introduction
 
-### Hosting Streamlit apps in Python
+## Hosting Streamlit apps in Python
 
-* The easy way: Streamlit community cloud.
-* The general solution: Publish a docker image and run the container somewhere.
+- The easy way: Streamlit community cloud.
+- The general solution: Publish a docker image and run the container somewhere.
 
 We focus more on the general solution.
 
-### Chainladder
+## Chainladder
 
-* I don't know much about casualty actuarial work so I will not be able to discuss the meaning behind what we are doing in this blog post. 
-* I do know that the Casualty Actuarial Society has published a library for making triangles that has become the most starred actuarial GitHub repository in history.
+- I don't know much about casualty actuarial work so I will not be able to discuss the meaning behind what we are doing in this blog post.
+- I do know that the Casualty Actuarial Society has published a library for making triangles that has become the most starred actuarial GitHub repository in history.
 
 So let's make some triangles.
 
-## The code
+# The code
 
-* `@st.cache_data` caches the data when we load it so that the application can refresh without reloading the data.
-* Streamlit will output any lines that are just expressions, like a single line that just says `triangle`. 
-* `lob = st.selectbox("Line of Business", clrd.index)` creates a selection box with labels that come from a [list-like thing](https://docs.streamlit.io/library/api-reference/widgets/st.selectbox).
-    * The choice from the selection box is stored as `lob`
-    * This variable can be referenced, like in `st.markdown("This is a triangle for " + lob + " and " + column + ".")`
+- `@st.cache_data` caches the data when we load it so that the application can refresh without reloading the data.
+- Streamlit will output any lines that are just expressions, like a single line that just says `triangle`.
+- `lob = st.selectbox("Line of Business", clrd.index)` creates a selection box with labels that come from a [list-like thing](https://docs.streamlit.io/library/api-reference/widgets/st.selectbox).
+  - The choice from the selection box is stored as `lob`
+  - This variable can be referenced, like in `st.markdown("This is a triangle for " + lob + " and " + column + ".")`
 
 ```py
 import streamlit as st
@@ -51,7 +51,7 @@ def get_data():
 clrd_df = get_data()
 clrd_df_head = clrd_df.head(n)
 clrd_df_head
-st.markdown("""Casualty actuaries create reports with \"loss triangles\". 
+st.markdown("""Casualty actuaries create reports with \"loss triangles\".
 For the triangles we use the [chainladder-python](https://chainladder-python.readthedocs.io/en/latest/intro.html) package. This package is published by the Casualty Actuarial Society and is
 the [most popular open source actuarial project ever](https://www.actuarialopensource.org/).""")
 st.markdown("""We host the loss triangles on the web using streamlit, the [most popular open source python package for hosting dashboards](https://star-history.com/#streamlit/streamlit&plotly/dash&rstudio/shiny&Date).""")
@@ -98,7 +98,7 @@ pandas==1.5.3
 IPython==8.12.0
 ```
 
-## The Dockerfile
+# The Dockerfile
 
 The Dockerfile is instructions to set up the machine and run the software.
 This Dockerfile is mostly copied from [docs.streamlit.io](https://docs.streamlit.io/knowledge-base/tutorials/deploy/docker).
@@ -128,15 +128,15 @@ HEALTHCHECK CMD curl --fail http://localhost:8501/_stcore/health
 ENTRYPOINT ["streamlit", "run", "main.py", "--server.port=8501", "--server.address=0.0.0.0"]
 ```
 
-## Deployment
+# Deployment
 
 There are many ways to deploy a thing. We will be using **GitHub actions** to automate the building and pushing of Docker images to **DockerHub** before deploying to **Azure Container Instances**.
 
-* GitHub actions: Like BitBucket Pipelines, Jenkins, GitLab CI/CD, TeamCity, etc.
-* DockerHub: Like GitHub/Amazon/Google/Microsoft's container registry. Or you could host your own registry.
-* Azure Container Instances: Like Amazon ECS, Google Cloud Run, Kubernetes, or anything with Docker installed.
+- GitHub actions: Like BitBucket Pipelines, Jenkins, GitLab CI/CD, TeamCity, etc.
+- DockerHub: Like GitHub/Amazon/Google/Microsoft's container registry. Or you could host your own registry.
+- Azure Container Instances: Like Amazon ECS, Google Cloud Run, Kubernetes, or anything with Docker installed.
 
-The benefit of Infrastructure as Code (IaC) is that you don't need to maintain a word document that says which buttons to press. 
+The benefit of Infrastructure as Code (IaC) is that you don't need to maintain a word document that says which buttons to press.
 The behavior of the deployment is defined by a text file that lives in a Git repository.
 
 ```yaml
@@ -152,7 +152,7 @@ jobs:
     steps:
       - name: Check out the repo
         uses: actions/checkout@v3
-      
+
       - name: Log in to Docker Hub
         uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
         with:
@@ -164,7 +164,7 @@ jobs:
         with:
           images: actuarial/streamlit-chainladder
       - name: Build and push Docker images
-        uses: docker/build-push-action@v4.0.0  
+        uses: docker/build-push-action@v4.0.0
         with:
           context: .
           push: true
@@ -186,7 +186,7 @@ jobs:
           ports: 8501
 ```
 
-## Finished
+# Finished
 
-* Visit the app at http://streamlit-chainladder-dns-name-label.centralus.azurecontainer.io:8501/. 
-* Source code here - https://github.com/MatthewCaseres/streamlit-chainladder.
+- Visit the app at http://streamlit-chainladder-dns-name-label.centralus.azurecontainer.io:8501/.
+- Source code here - https://github.com/MatthewCaseres/streamlit-chainladder.

@@ -57,7 +57,7 @@ export default function Document() {
           crossOrigin="anonymous"
         ></link>
       </Head>
-      <body className="flex h-full flex-col bg-zinc-50 dark:bg-black">
+      <body className="flex h-full flex-col bg-white dark:bg-black">
         <Main />
         <NextScript />
       </body>
