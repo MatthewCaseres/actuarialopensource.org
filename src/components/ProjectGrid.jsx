@@ -30,12 +30,12 @@ export function ProjectGrid({ repos }) {
             .map((repo, idx) => (
               <li
                 key={idx}
-                className="col-span-1 m-1 divide-y divide-gray-200 rounded-lg border border-gray-300 bg-white shadow hover:bg-blue-100 dark:border-gray-600 dark:bg-gray-800  dark:text-zinc-100 dark:hover:bg-gray-700"
+                className="group col-span-1 m-1 divide-y divide-gray-200 rounded-lg border border-gray-300 bg-white shadow hover:bg-blue-100 dark:border-gray-600 dark:bg-gray-800  dark:text-zinc-100 dark:hover:bg-gray-700"
               >
                 <a target="_blank" rel="noopener noreferrer" href={repo.url}>
                   <div>
                     {/* <div className="flex items-center justify-center truncate p-3"> */}
-                    <h3 className="truncate  p-3 font-medium text-blue-700 dark:text-blue-500">
+                    <h3 className="truncate  p-3 font-medium text-blue-700 dark:text-blue-500 group-hover:underline">
                       {repo.name}
                     </h3>
                     {/* </div> */}

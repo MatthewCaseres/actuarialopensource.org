@@ -22,7 +22,7 @@ export default function Home({ repos }) {
         />
       </Head>
       <Hero />
-      <Container className="mt-32">
+      <Container className="mt-16">
         <ProjectGrid repos={repos} />
       </Container>
       <Container className="mt-5">
