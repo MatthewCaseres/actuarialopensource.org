@@ -38,7 +38,7 @@ export function Hero() {
                   <LinkedIn height={30} width={30} alt="LinkedIn Logo" />
                 </HeroButton>
               </a>
-              <Link href="/articles/welcome">
+              <Link href="/book/welcome">
                 <HeroButton title="Education">
                   <TechBook
                     className="fill-sky-700"
