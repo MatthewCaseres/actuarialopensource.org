@@ -1,11 +1,14 @@
+import Link from 'next/link'
 import Chevron from './Chevron'
 import {
   useSidebarState,
   useSidebarDispatch,
   StatefulNode,
 } from './SidebarContext'
+import { useRouter } from 'next/dist/client/router'
+import { useEffect } from 'react'
 
-const TreeNode = ({ node }: { node: StatefulNode }) => {
+const TreeNodeBase = ({ node }: { node: StatefulNode }) => {
   const dispatch = useSidebarDispatch()
 
   const handleClick = (event: React.MouseEvent<HTMLLIElement>) => {
@@ -20,19 +23,36 @@ const TreeNode = ({ node }: { node: StatefulNode }) => {
 
   return (
     <li onClick={handleClick} className="p-1">
-      <span className="flex items-center">
+      <span className="group flex items-center">
         <Chevron isVisible={!!node.children} expanded={node.open} />
-        <span className="ml-1">{node.title}</span>
+        <span className="ml-1 rounded p-1 ">
+          <span>{node.title}</span>
+        </span>
       </span>
       {node.children && node.open && <TreeNodes nodes={node.children} />}
     </li>
   )
 }
-
-{
-  /* <div class="shadow-[0_0_0_5px_rgba(0,0,0,0.3)]">
-  <!-- ... -->
-</div> */
+// ${
+//   router.asPath === node.url ? 'text-indigo-500' : ''
+// }
+const TreeNode = ({ node }: { node: StatefulNode }) => {
+  const router = useRouter()
+  return node.url ? (
+    <Link href={node.url}>
+      <div
+        className={`hover:bg-gray-200 hover:text-indigo-500 hover:underline dark:hover:bg-gray-700 ${
+          router.asPath === node.url
+            ? 'bg-gray-100 text-indigo-500 dark:bg-gray-800'
+            : ''
+        }`}
+      >
+        <TreeNodeBase node={node} />
+      </div>
+    </Link>
+  ) : (
+    <TreeNodeBase node={node} />
+  )
 }
 
 const TreeNodes = ({ nodes }: { nodes: StatefulNode[] }) => {
@@ -47,6 +67,19 @@ const TreeNodes = ({ nodes }: { nodes: StatefulNode[] }) => {
 
 function LeftNav() {
   const sidebarState = useSidebarState()
+  const dispatch = useSidebarDispatch()
+
+  const router = useRouter()
+  useEffect(() => {
+    const node = findNodeByUrl(sidebarState, router.asPath)
+    if (node) {
+      dispatch({
+        type: 'toggle',
+        path: node.treePath,
+      })
+    }
+  }, [router.asPath])
+
   return (
     <div className="select-none font-light text-gray-700 dark:text-gray-200">
       <ul className="ml-2">
@@ -56,6 +89,25 @@ function LeftNav() {
       </ul>
     </div>
   )
+}
+
+// write a dfs to find the node with the given url
+function findNodeByUrl(
+  nodes: StatefulNode[],
+  url: string
+): StatefulNode | undefined {
+  for (const node of nodes) {
+    if (node.url === url) {
+      return node
+    }
+    if (node.children) {
+      const found = findNodeByUrl(node.children, url)
+      if (found) {
+        return found
+      }
+    }
+  }
+  return undefined
 }
 
 export { LeftNav }

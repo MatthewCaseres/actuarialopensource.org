@@ -1,17 +1,19 @@
-import { ArticleLayout } from '@/components/ArticleLayout'
-import Image from 'next/future/image'
 import dpGif from './dp-gif.gif'
 import spreadsheetRecursion from './spreadsheet-recursion.png'
+import SidebarLayout from '@/components/Sidebar/SidebarLayout'
+import Image from 'next/future/image'
 
 export const meta = {
   author: 'Matthew Caseres',
-  date: '2022-11-29',
-  title: 'Memoization and life actuarial software',
+  date: '2023-04-25',
+  title: 'Hosting chainladder-python on Streamlit',
   description:
-    'We discuss memoization and how it speeds up life actuarial software. Also, what is life actuarial software?',
+    'We talk about deploying a Streamlit app with triangles from Chainladder',
 }
 
-export default (props) => <ArticleLayout meta={meta} {...props} />
+export default (props) => <SidebarLayout {...props} />
+
+# Memoization and life
 
 Memoization is storing the results of functions to avoid recomputing them later on. It is often used to speed up recursive calculations. Let's do a simple calculation to see how it works.
 
@@ -21,14 +23,14 @@ This can be calculated without recursion, but we use recursion here to illustrat
 
 Functions are named in a way that might be familiar to actuaries but here is a quick explanation:
 
-* `q(t)` is the mortality rate at time `t`, the percentage of people that die each year
-    * `1-q(t)` is the probability of not dying in year `t`
-* `pols_if(t)` is how many policies there are at time `t`
-    * In this case we start with a single person
-    * `pols_if(0) == 1` by assumption
-    * `pols_if(1) == pols_if(0)*(1-q(0))`
-    * `pols_if(2) == pols_if(1)*(1-q(1))`
-        * And so on
+- `q(t)` is the mortality rate at time `t`, the percentage of people that die each year
+  - `1-q(t)` is the probability of not dying in year `t`
+- `pols_if(t)` is how many policies there are at time `t`
+  - In this case we start with a single person
+  - `pols_if(0) == 1` by assumption
+  - `pols_if(1) == pols_if(0)*(1-q(0))`
+  - `pols_if(2) == pols_if(1)*(1-q(1))`
+    - And so on
 
 ## Recursion with no cache
 
@@ -181,6 +183,7 @@ There is a modelx plugin for the Spyder IDE which provides features not normally
 - [Why you should use modelx](https://modelx.io/blog/2022/10/29/why-you-should-use-modelx/)
 
 Several actuaries have made demonstrations of caching recursive functions outside of modelx:
+
 - [cashflower](https://github.com/acturtle/cashflower)
 - [heavymodel](https://github.com/lewisfogden/heavymodel)
 - [JuliaActuary/Learn](https://github.com/JuliaActuary/Learn/tree/master/recursion_memoization)

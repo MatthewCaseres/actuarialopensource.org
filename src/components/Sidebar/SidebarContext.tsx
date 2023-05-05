@@ -1,7 +1,7 @@
 import { useReducer, createContext, useContext, Reducer } from 'react'
 import { produce, Draft } from 'immer'
 
-type RawStatefulNode = {
+export type RawStatefulNode = {
   title: string
   url?: string
   children?: RawStatefulNode[]
@@ -33,7 +33,7 @@ function processRawNodes(
   })
 }
 
-type Action = { type: 'toggle'; path: readonly number[] }
+type Action = { type: 'toggle'; path: readonly number[] } | { type: '' }
 
 type SidebarDispatch = (action: Action) => void
 const SidebarStateContext = createContext<StatefulNode[] | undefined>(undefined)
@@ -90,5 +90,45 @@ function useSidebarDispatch() {
   return context
 }
 
-export { SidebarProvider, useSidebarState, useSidebarDispatch }
+// write a
+
+const rawNodes: RawStatefulNode[] = [
+  {
+    title: 'Welcome',
+    url: '/articles/welcome',
+  },
+  {
+    title: 'IT Operations',
+    children: [
+      {
+        title: 'Deploy dashboards with Docker (Python)',
+        url: '/articles/chainladder-streamlit',
+      },
+    ],
+  },
+  {
+    title: 'Actuarial modeling',
+    children: [
+      {
+        title: 'Memoization and life contingencies',
+        url: '/articles/memoization-and-life',
+      },
+    ],
+  },
+  {
+    title: 'GPT generated',
+    children: [
+      {
+        title: 'Poisson processes',
+        url: '/articles/gpt-4/01-poisson',
+      },
+      {
+        title: 'Markov chains',
+        url: '/articles/gpt-4/02-markov',
+      },
+    ],
+  },
+]
+
+export { SidebarProvider, useSidebarState, useSidebarDispatch, rawNodes }
 export type { StatefulNode }

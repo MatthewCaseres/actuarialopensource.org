@@ -104,15 +104,15 @@ module.exports = {
             fontWeight: theme('fontWeight.semibold'),
           },
           h1: {
-            fontSize: theme('fontSize.2xl')[0],
+            fontSize: theme('fontSize.4xl')[0],
             lineHeight: theme('lineHeight.7'),
-            marginTop: theme('spacing.15'),
+            marginTop: theme('spacing.14'),
             marginBottom: theme('spacing.4'),
           },
           h2: {
             fontSize: theme('fontSize.xl')[0],
             lineHeight: theme('lineHeight.7'),
-            marginTop: theme('spacing.15'),
+            marginTop: theme('spacing.12'),
             marginBottom: theme('spacing.4'),
           },
           h3: {
