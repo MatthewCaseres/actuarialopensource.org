@@ -1,0 +1,26 @@
+import SidebarLayout from '@/components/Sidebar/SidebarLayout'
+import Image from 'next/future/image'
+import dynamic from 'next/dynamic'
+
+export const CodeEditor = dynamic(
+  () => import('@/components/CodeEditor/CodeEditor'),
+  {
+    ssr: false,
+  }
+)
+
+export default (props) => <SidebarLayout {...props} />
+
+# Welcome
+
+This is where we do our best to produce open source educational materials. You can collapse/expand the sidebar with the button in the bottom left.
+
+Some of our work contains interactive Python playgrounds.
+
+<CodeEditor
+  code={
+    'from itertools import groupby\n\nprint([list(g) for k, g in groupby("aabbbbaaababaa")])\nprint(2+2)\nprint([x**2 for x in range(5)])'
+  }
+/>
+
+Some content is written by GPT-4, some isn't, and some is partially. The content written mostly by GPT-4 goes in the "GPT generated" section of the sidebar.
