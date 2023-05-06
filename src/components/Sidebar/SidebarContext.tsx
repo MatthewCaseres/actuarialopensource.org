@@ -95,14 +95,14 @@ function useSidebarDispatch() {
 const rawNodes: RawStatefulNode[] = [
   {
     title: 'Welcome',
-    url: '/articles/welcome',
+    url: '/book/welcome',
   },
   {
     title: 'IT Operations',
     children: [
       {
         title: 'Deploy dashboards with Docker (Python)',
-        url: '/articles/chainladder-streamlit',
+        url: '/book/chainladder-streamlit',
       },
     ],
   },
@@ -111,7 +111,7 @@ const rawNodes: RawStatefulNode[] = [
     children: [
       {
         title: 'Memoization and life contingencies',
-        url: '/articles/memoization-and-life',
+        url: '/book/memoization-and-life',
       },
     ],
   },
@@ -119,12 +119,20 @@ const rawNodes: RawStatefulNode[] = [
     title: 'GPT generated',
     children: [
       {
-        title: 'Poisson processes',
-        url: '/articles/gpt-4/01-poisson',
+        title: 'Algorithms',
+        url: '/book/gpt-4/algorithms',
+      },
+      {
+        title: 'Memoization',
+        url: '/book/gpt-4/memoization',
       },
       {
         title: 'Markov chains',
-        url: '/articles/gpt-4/02-markov',
+        url: '/book/gpt-4/02-markov',
+      },
+      {
+        title: 'Poisson processes',
+        url: '/book/gpt-4/01-poisson',
       },
     ],
   },

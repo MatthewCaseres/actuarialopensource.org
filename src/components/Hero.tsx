@@ -24,7 +24,7 @@ export function Hero() {
               <span className="block xl:inline">Actuarial</span>{' '}
               <span className="block xl:inline">Open Source</span>
             </h1>
-            <p className="text-basesm:text-lg mx-auto my-3 max-w-md md:my-5 md:max-w-3xl md:text-xl">
+            <p className="mx-auto my-3 max-w-md text-base sm:text-lg md:my-5 md:max-w-3xl md:text-xl">
               A community of actuaries and developers building open source
               actuarial software.
             </p>
@@ -38,7 +38,7 @@ export function Hero() {
                   <LinkedIn height={30} width={30} alt="LinkedIn Logo" />
                 </HeroButton>
               </a>
-              <Link href="/articles/welcome">
+              <Link href="/book/welcome">
                 <HeroButton title="Education">
                   <TechBook
                     className="fill-sky-700"
