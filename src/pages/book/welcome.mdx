@@ -1,6 +1,6 @@
 import SidebarLayout from '@/components/Sidebar/SidebarLayout'
-import Image from 'next/future/image'
 import dynamic from 'next/dynamic'
+import Link from 'next/link'
 
 export const CodeEditor = dynamic(
   () => import('@/components/CodeEditor/CodeEditor'),
@@ -25,3 +25,5 @@ Some of our work contains interactive Python playgrounds.
 
 Some content is written by GPT-4, some isn't, and some is partially. The content written mostly by GPT-4 goes in the "GPT generated" section of the sidebar.
 This content will be improved by human reviewers and leave the "GPT generated" section eventually.
+
+I think our coolest page so far is <Link href="/book/gpt-4/memoization">GPT-4 discussing of life insurance model caching code</Link>.
