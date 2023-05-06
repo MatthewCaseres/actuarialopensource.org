@@ -100,7 +100,7 @@ export default function CodeEditor(props: CodeEditorProps) {
       />
 
       {showOutput && (
-        <pre className="mt-4 text-left">
+        <pre className="mt-4 overflow-auto text-left">
           <code>{stdout}</code>
           <code className="text-red-500">{stderr}</code>
         </pre>
