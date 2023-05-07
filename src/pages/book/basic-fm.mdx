@@ -18,23 +18,9 @@ export const code2 =
 export const code3 =
   'annuity_immediate = [0, 100, 100, 100, 100, 100]\nannuity_due = [100, 100, 100, 100, 100, 0]\n\ndef get_pv_cashflows(cashflows: list, interest_rate: float):\n    total = 0\n    for i, cashflow in enumerate(cashflows):\n        total += cashflow * (1 + interest_rate) ** -i\n    return total\n\nprint(f"pv_annuity_immediate: {get_pv_cashflows(annuity_immediate, 0.05)}")\nprint(f"pv_annuity_due: {get_pv_cashflows(annuity_due, 0.05)}")'
 
-# Actuarial notation implemented in Python
+# Basic financial mathematics
 
-## Motivations for actuarial notation
-
-Remember that actuarial science predates computers. A [reference on Actuarial notation](https://www.casact.org/sites/default/files/database/proceed_proceed49_49123.pdf) traces it's origins to the 1800s:
-
-> The existing international actuarial notation was founded on the 'Key to the
-> Notation' given in the Institute of Actuaries Text-Book, Part II, Life Contingencies, by George King, and is embodied in an explanatory statement
-> adopted unanimously by the Second International Actuarial Congress held in
-> London in May 1898 and printed on pp. 618-40 of the Transactions of that
-> Congress.
-
-Prior to computers, actuarial calculations used in the insurance industry were done on paper. The notation was designed to be easy to write and flexible. We will largely avoid actuarial notation because it is not easy to type on a computer and can be written using Python code.
-
-## The time value of money
-
-### Cashflows
+## Cashflows
 
 Cashflows are money that is paid or received at a certain time. In the code below, `cashflows[i]` is the amount of money paid or received at time `i` where `i` represents the number of years since the present.
 
