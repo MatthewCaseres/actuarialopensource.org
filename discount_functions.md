@@ -78,7 +78,7 @@ In practice, we may define discount rates over some discrete range ending at the
 * `0 < v(t1, t2)`
 
 ```py
-def v(t1: int, t2: int) -> int:
+def v(t1: int, t2: int) -> float:
 ```
 
 In this case we must consider how to specify the discount rate, and see that the vector 
