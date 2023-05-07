@@ -110,6 +110,10 @@ const rawNodes: RawStatefulNode[] = [
     title: 'Actuarial modeling',
     children: [
       {
+        title: 'Actuarial notation in Python',
+        url: '/book/notation',
+      },
+      {
         title: 'Memoization and life contingencies',
         url: '/book/memoization-and-life',
       },
