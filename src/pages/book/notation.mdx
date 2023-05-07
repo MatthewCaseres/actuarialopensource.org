@@ -1,22 +1,34 @@
 import SidebarLayout from '@/components/Sidebar/SidebarLayout'
 import TimeDiagram from './images/TimeDiagram'
-import timeDiagram from './images/time-diagram.svg'
 import Image from 'next/future/image'
+import dynamic from 'next/dynamic'
+
+export const CodeEditor = dynamic(
+  () => import('@/components/CodeEditor/CodeEditor'),
+  {
+    ssr: false,
+  }
+)
 
 export default (props) => <SidebarLayout {...props} />
+export const code1 =
+  'cashflows = [100, 200, -50, 100, 100]\n\ndef accumulated_value(cashflows: list, interest_rate: float):\n    result = []\n    total = 0\n    for i, cashflow in enumerate(cashflows):\n        total = total*(1+interest_rate) + cashflow\n        result.append(total)\n    return result\n\nprint(accumulated_value(cashflows, 0.05))'
+export const code2 =
+  'cashflows = [100, 200, -50, 100, 100]\ndef get_pv_cashflows(cashflows: list, interest_rate: float):\n    total = 0\n    for i, cashflow in enumerate(cashflows):\n        total += cashflow * (1 + interest_rate) ** -i\n    return total\n\nprint(get_pv_cashflows(cashflows, 0.05))'
+export const code3 =
+  'annuity_immediate = [0, 100, 100, 100, 100, 100]\nannuity_due = [100, 100, 100, 100, 100, 0]\n\ndef get_pv_cashflows(cashflows: list, interest_rate: float):\n    total = 0\n    for i, cashflow in enumerate(cashflows):\n        total += cashflow * (1 + interest_rate) ** -i\n    return total\n\nprint(f"pv_annuity_immediate: {get_pv_cashflows(annuity_immediate, 0.05)}")\nprint(f"pv_annuity_due: {get_pv_cashflows(annuity_due, 0.05)}")'
 
 # Actuarial notation implemented in Python
-
 
 ## Motivations for actuarial notation
 
 Remember that actuarial science predates computers. A [reference on Actuarial notation](https://www.casact.org/sites/default/files/database/proceed_proceed49_49123.pdf) traces it's origins to the 1800s:
 
 > The existing international actuarial notation was founded on the 'Key to the
-Notation' given in the Institute of Actuaries Text-Book, Part II, Life Contingencies, by George King, and is embodied in an explanatory statement
-adopted unanimously by the Second International Actuarial Congress held in
-London in May 1898 and printed on pp. 618-40 of the Transactions of that
-Congress.
+> Notation' given in the Institute of Actuaries Text-Book, Part II, Life Contingencies, by George King, and is embodied in an explanatory statement
+> adopted unanimously by the Second International Actuarial Congress held in
+> London in May 1898 and printed on pp. 618-40 of the Transactions of that
+> Congress.
 
 Prior to computers, actuarial calculations used in the insurance industry were done on paper. The notation was designed to be easy to write and flexible. We will largely avoid actuarial notation because it is not easy to type on a computer and can be written using Python code.
 
@@ -32,80 +44,46 @@ cashflows = [100, 200, -50, 100, 100]
 
 This is visualized in textbooks using a "time diagram".
 
-
 <TimeDiagram />
 
 ## Accumulated value
 
 If you invest 1 dollar, how much money will you have in a year? The answer is more than a dollar. How much more? It depends on the interest rate. If the interest rate is 5%, then you will have $1 \cdot (1+ 0.05) = 1.05$ dollars. This is called the accumulated value of a dollar in 1 year.
 
-* $i$ is the interest rate.
-  * We assume the interest rate to be constant for this discussion.
-  * If we have $1$ dollar today, we can invest it and it will become $1+i$ dollars in a year with an annual interest rate of $i$. In two years this will compound and we will have $(1+i)^2$ dollars. In $n$ years we will have $(1+i)^n$ dollars.
+- $i$ is the interest rate.
+  - We assume the interest rate to be constant for this discussion.
+  - If we have $1$ dollar today, we can invest it and it will become $1+i$ dollars in a year with an annual interest rate of $i$. In two years this will compound and we will have $(1+i)^2$ dollars. In $n$ years we will have $(1+i)^n$ dollars.
 
 We can do an accumulation calculation in Python using a `for` loop, it will sum up the cashflows and project them forward with interest. The result is a list where `result[i]` is the accumulated value of the cashflows with interest at time `i`. The interest rate is assumed to be constant.
 
-```python
-cash_flows = [100, 200, -50, 100, 100]
-
-def accumulated_value(cashflows:: list, interest_rate: float):
-    result = []
-    tot = 0
-    for i, cf in enumerate(cashflows):
-        tot += cf
-        result.append(tot * (1 + interest_rate) ** i)
-    return result
-
-print(accumulated_value(cashflows, 0.05))
-```
+<CodeEditor code={code1} />
 
 ## Present value
 
 Just like we can project cashflows forward with interest, we can also project them backward. If we have $1$ dollar in a year, how much is it worth today? Well, if we have $v$ dollars and invest it today to get $1$ dollar in a year, then $v(1+i) = 1$ and $v = \frac{1}{1+i}$. This is the present value of a dollar in 1 year.
 
-* $v = \frac{1}{1+i}$ is the **discount factor**.
-* $v$ is the **present value** of a dollar one year from now.
+- $v = \frac{1}{1+i}$ is the **discount factor**.
+- $v$ is the **present value** of a dollar one year from now.
 
 We can calculate the present value of cashflows.
 
-```python
-cash_flows = [100, 200, -50, 100, 100]
-def get_pv_cashflows(cashflows: list, interest_rate: float):
-    tot = 0
-    for i, cf in enumerate(cashflows):
-        tot += cf * (1 + interest_rate) ** -i
-    return tot
-
-print(get_pv_cashflows(cashflows, 0.05))
-```
+<CodeEditor code={code2} />
 
 ## Annuities
 
 An annuity is a series of payments that are made at regular intervals. There are two types of annuities.
 
-* Annuity-immediate: payments are made at the end of each period.
-    * I have no idea why the annuity-immediate doesn't pay immediately (at the beginning of the period).
-* Annuity-due: payments are made at the beginning of each period.
+- Annuity-immediate: payments are made at the end of each period.
+  - I have no idea why the annuity-immediate doesn't pay immediately (at the beginning of the period).
+- Annuity-due: payments are made at the beginning of each period.
 
-Here are 5 payment annuities with payments of 100 dollars. We can calculate the present value of these annuities.
+Here are 5-payment annuities with payments of 100 dollars. We can calculate the present value of these annuities.
 
-```python
-annuity_immediate = [0, 100, 100, 100, 100, 100]
-annuity_due = [100, 100, 100, 100, 100, 0]
-
-def get_pv_cashflows(cashflows: list, interest_rate: float):
-    tot = 0
-    for i, cf in enumerate(cashflows):
-        tot += cf * (1 + interest_rate) ** -i
-    return tot
-
-print(f"pv_annuity_immediate: {get_pv_cashflows(annuity_immediate, 0.05)}")
-print(f"pv_annuity_due: {get_pv_cashflows(annuity_due, 0.05)}")
-```
+<CodeEditor code={code3} />
 
 ## Quick maths
 
-Actuarial exams require to be very fast at implementing these calculations by hand for special cases that have closed-form solution. Here is some of the math you might find in an introductory financial mathematics course. 
+Actuarial exams require to be very fast at implementing these calculations by hand for special cases that have closed-form solution. Here is some of the math you might find in an introductory financial mathematics course.
 
 When the interest rate and payments are constant, there is a closed form for the present value of cashflows.
 
