@@ -16,6 +16,7 @@
     "@mdx-js/loader": "^2.1.2",
     "@next/mdx": "^12.2.3",
     "@tailwindcss/typography": "^0.5.4",
+    "@vercel/analytics": "^1.0.1",
     "ace-builds": "^1.19.0",
     "autoprefixer": "^10.4.7",
     "clsx": "^1.2.0",
