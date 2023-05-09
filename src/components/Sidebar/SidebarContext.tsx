@@ -98,6 +98,10 @@ const rawNodes: RawStatefulNode[] = [
     url: '/book/welcome',
   },
   {
+    title: 'Discount functions',
+    url: '/book/discount',
+  },
+  {
     title: 'IT Operations',
     children: [
       {
