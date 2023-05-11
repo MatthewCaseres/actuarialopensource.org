@@ -1,21 +1,32 @@
 import React, { useState } from 'react'
+import { Provider, atom, useAtom } from 'jotai'
 import PythonSVG from './PythonSVG'
 
 type Tab = {
-  id: number
   title: string
+  content: string
 }
 
-function Tabs({ initialTabs }: { initialTabs: string[] }) {
-  const tabs: Tab[] = initialTabs.map((title, index) => ({ id: index, title }))
+function Tabs() {
+  const tabs: Tab[] = [
+    {
+      title: 'file1.py',
+      content: 'print("hello world")',
+    },
+    {
+      title: 'file2.py',
+      content: 'print("hello world")',
+    },
+  ]
 
   return (
-    <div className="bg-gray-100 p-4">
-      <div className="flex text-sm font-semibold text-gray-400">
-        {tabs.map((tab) => (
+    <div className=" p-4">
+      <div className="flex text-sm font-semibold text-neutral-400">
+        {tabs.map((tab, i) => (
           <div
-            key={tab.id}
-            className="flex items-center border-r border-gray-300 bg-gray-800 p-2 text-center"
+            key={i}
+            className="flex  items-center border border-neutral-600 bg-gray-800 p-2 text-center"
+            style={{ minWidth: '90px' }}
           >
             <PythonSVG />
             <span>{tab.title}</span>
@@ -26,4 +37,14 @@ function Tabs({ initialTabs }: { initialTabs: string[] }) {
   )
 }
 
-export default Tabs
+function App() {
+  const initialTabTitles = ['file1.py', 'file2.py', 'C']
+
+  return (
+    <div className="mt-20">
+      <Tabs />
+    </div>
+  )
+}
+
+export default App

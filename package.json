@@ -25,6 +25,7 @@
     "focus-visible": "^5.2.0",
     "git-url-parse": "^13.1.0",
     "immer": "^10.0.1",
+    "jotai": "^2.1.0",
     "next": "^12.3.0",
     "next-mdx-remote": "^4.4.1",
     "octokit": "^2.0.8",
