@@ -110,7 +110,7 @@ export const repoUrls: string[] = [
   'https://github.com/lrnv/Copulas.jl',
   'https://github.com/JuliaActuary/ActuaryUtilities.jl',
   'https://github.com/OasisLMF/OasisLMF',
-  'https://github.com/casact/FASLR',
+  'https://github.com/actuarialopensource/actuarialopensource.org',
   'https://github.com/JuliaActuary/MortalityTables.jl',
   'https://github.com/casact/chainladder-python',
   'https://github.com/fumitoh/lifelib',
