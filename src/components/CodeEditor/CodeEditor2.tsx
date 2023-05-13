@@ -3,7 +3,7 @@ import { produce } from 'immer'
 import { TabsProvider, useTabs } from './EditorContext'
 import clsx from 'clsx'
 
-import { usePython } from 'react-py'
+import { PythonProvider, usePython } from 'react-py'
 import type { Packages } from 'react-py/dist/types/Packages'
 import type { Tab } from './EditorContext'
 
@@ -70,9 +70,11 @@ interface CodeEditorProps {
 
 export default function CodeEditor2(props: CodeEditorProps) {
   return (
-    <TabsProvider tabs={props.tabs}>
-      <CodeEditor {...props} />
-    </TabsProvider>
+    <PythonProvider terminateOnCompletion={true} lazy={true}>
+      <TabsProvider tabs={props.tabs}>
+        <CodeEditor {...props} />
+      </TabsProvider>
+    </PythonProvider>
   )
 }
 
