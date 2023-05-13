@@ -1,4 +1,4 @@
-import { StarIcon } from '@heroicons/react/outline'
+import { StarIcon } from '@heroicons/react/24/outline'
 import { VscRepoForked } from 'react-icons/vsc'
 import { FlatQuery } from '@/lib/query'
 

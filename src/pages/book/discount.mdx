@@ -3,17 +3,13 @@ import Image from 'next/future/image'
 import dynamic from 'next/dynamic'
 
 export const CodeEditor = dynamic(
-  () => import('@/components/CodeEditor/CodeEditor'),
+  () => import('@/components/CodeEditor/CodeEditor2'),
   {
     ssr: false,
   }
 )
 
 export default (props) => <SidebarLayout {...props} />
-export const code1 =
-  '# pv[i] = v(0, i)\npv = [1, 0.952, 0.924, 0.906, 0.897, 0.831]\n\n# This function is called in O(1) time.\ndef v(i, j):\n    return pv[j]/pv[i]\n\n# interest_rate[i] = interest from i to i+1\ninterest_rate = [v(i, i+1)**-1 - 1 for i in range(len(pv)-1)]\nprint(f"{interest_rate = }")'
-export const code2 =
-  'cashflows = [100, 200, -50, 100, 100]\ndef get_pv_cashflows(cashflows: list, interest_rate: float):\n    total = 0\n    for i, cashflow in enumerate(cashflows):\n        total += cashflow * (1 + interest_rate) ** -i\n    return total\n\nprint(get_pv_cashflows(cashflows, 0.05))'
 
 # Discount functions
 
@@ -103,7 +99,15 @@ In this case we must consider how to specify the discount rate, and see that the
 
 Allows for $O(1)$ lookups of the discount rate for any `t1, t2` pair
 
-<CodeEditor code={code1} />
+      <CodeEditor
+        tabs={[
+          {
+            title: 'main',
+            content:
+              '# pv[i] = v(0, i)\npv = [1, 0.952, 0.924, 0.906, 0.897, 0.831]\n\n# This function is called in O(1) time.\ndef v(i, j):\n    return pv[j]/pv[i]\n\n# interest_rate[i] = interest from i to i+1\ninterest_rate = [v(i, i+1)**-1 - 1 for i in range(len(pv)-1)]\nprint(f"{interest_rate = }")',
+          },
+        ]}
+      />
 
 ## Present value
 
@@ -127,17 +131,27 @@ To take the present value, $v(t) = e^{-kt}$. Note that for something like an ann
 
 1. Return an array `arr` of length `n` where `v0[i]` = $v(0, i)$ for a constant `interest_rate`
 
-export const codelol =
-  'def get_present_values(interest_rate: float, n: int):\n    return [1]*n #fix this to fix the assertion error\n\nprint(get_present_values(.05, 3))\nassert abs(sum(get_present_values(.05, 3)) - 2.85941) < .01, "wrong total"'
-
-<CodeEditor code={codelol} />
+<CodeEditor
+  tabs={[
+    {
+      title: 'main',
+      content:
+        'def get_present_values(interest_rate: float, n: int):\n    return [1]*n #fix this to fix the assertion error\n\nprint(get_present_values(.05, 3))\nassert abs(sum(get_present_values(.05, 3)) - 2.85941) < .01, "wrong total"',
+    },
+  ]}
+/>
 
 2. Given an array `annual_interest_rate[i]` = $v(i, i+1)^{-1}-1$, compute an array `pv[i]` = $v(0, i)$
 
-export const codeir =
-  'def get_present_values(interest_rates: list[float]):\n    return [1]*(len(interest_rates) + 1)\n\n\nres = get_present_values([.05, .03])\nassert len(res) == 3, "wrong length"\nassert abs(sum(res) - 2.877) < .01, "wrong total"'
-
-<CodeEditor code={codeir} />
+<CodeEditor
+  tabs={[
+    {
+      title: 'main',
+      content:
+        'def get_present_values(interest_rates: list[float]):\n    return [1]*(len(interest_rates) + 1)\n\n\nres = get_present_values([.05, .03])\nassert len(res) == 3, "wrong length"\nassert abs(sum(res) - 2.877) < .01, "wrong total"',
+    },
+  ]}
+/>
 
 3. Implement a function that takes an array `cashflows` and a discount array `pv[i]` = $v(0, i)$ and compute the following
 
@@ -145,10 +159,15 @@ $$
 \sum_{i=0}^N \text{cashflows}[i] \cdot v(k, i)
 $$
 
-export const codecipvt =
-  'def get_pv_at_t(\n    cashflows: list[float], \n    interest_rate: float,\n    t: int):\n        return 2 # fix this\n\nassert abs(get_pv_at_t([1,1,1], .05, 1) - 3.00) < .01, "wrong sum"'
-
-<CodeEditor code={codecipvt} />
+<CodeEditor
+  tabs={[
+    {
+      title: 'main',
+      content:
+        'def get_pv_at_t(\n    cashflows: list[float], \n    interest_rate: float,\n    t: int):\n        return 2 # fix this\n\nassert abs(get_pv_at_t([1,1,1], .05, 1) - 3.00) < .01, "wrong sum"',
+    },
+  ]}
+/>
 
 4. We want to know all values of a discount function $v(t_1, t_2)$ where
 
@@ -160,4 +179,11 @@ We know some values of $v(t_1, t_2)$, we need to compute the rest of them. The k
 - Under what conditions is it possible to compute all values of $v(t_1, t_2)$?
 - If possible, construct a data structure in $O(N)$ that provides $O(1)$ lookup of $v(t_1, t_2)$ for any `t1, t2` pair.
 
-<CodeEditor code="# not yet implemented, you can help out on GitHub" />
+<CodeEditor
+  tabs={[
+    {
+      title: 'main',
+      content: '# not yet implemented, you can help out on GitHub',
+    },
+  ]}
+/>
