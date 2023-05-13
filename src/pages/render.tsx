@@ -1,5 +1,4 @@
 import React from 'react'
-import BrowserTabs from '@/components/CodeEditor/Tabs'
 import SidebarLayout from '@/components/Sidebar/SidebarLayout'
 import dynamic from 'next/dynamic'
 const CodeEditor = dynamic(
@@ -12,15 +11,15 @@ const CodeEditor = dynamic(
 
 const initialTabs = [
   {
-    title: 'file1.py',
+    title: 'file1',
     content: 'print("hello world1")',
   },
   {
-    title: 'file2.py',
+    title: 'file2',
     content: 'print("hello world2")',
   },
   {
-    title: 'f.py',
+    title: 'f',
     content: 'print("hello world")',
   },
 ]
@@ -35,6 +34,30 @@ function App() {
         fsda fdsa dsfa fsad dsaf df
       </div>
       <CodeEditor tabs={initialTabs} />
+      <CodeEditor
+        tabs={[
+          {
+            title: 'file1',
+            content:
+              'from file2 import add\nfrom f import subb\n\nprint(add(1,2))\nprint(subb(1,2))\n',
+          },
+          { title: 'file2', content: 'def add(a, b):\n    return a + b' },
+          { title: 'f', content: 'def subb(a, b):\n    return a - b' },
+        ]}
+      />
+      <CodeEditor
+        tabs={[
+          {
+            title: 'main',
+            content: '',
+          },
+          {
+            title: 'somefile',
+            content: '',
+          },
+        ]}
+        debug
+      />
     </SidebarLayout>
   )
 }

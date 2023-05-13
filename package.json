@@ -11,7 +11,7 @@
   "browserslist": "defaults, not ie <= 11",
   "dependencies": {
     "@headlessui/react": "^1.7.0",
-    "@heroicons/react": "^1.0.6",
+    "@heroicons/react": "^2.0.18",
     "@mapbox/rehype-prism": "^0.7.0",
     "@mdx-js/loader": "^2.1.2",
     "@next/mdx": "^12.2.3",

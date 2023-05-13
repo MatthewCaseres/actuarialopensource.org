@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic'
 import Link from 'next/link'
 
 export const CodeEditor = dynamic(
-  () => import('@/components/CodeEditor/CodeEditor'),
+  () => import('@/components/CodeEditor/CodeEditor2'),
   {
     ssr: false,
   }
@@ -18,9 +18,17 @@ This is where we do our best to produce open source educational materials. You c
 Some of our work contains interactive Python playgrounds.
 
 <CodeEditor
-  code={
-    'print("You can run code on this website.")\nprint("slow connections take time to load Python")'
-  }
+  tabs={[
+    {
+      title: 'main',
+      content: 'from somefile import twoSum\n\nprint(twoSum([2,7,11,15], 9))',
+    },
+    {
+      title: 'somefile',
+      content:
+        'def twoSum(nums: list[int], target: int) -> list[int]:\n    for i in range(len(nums)):\n        for j in range(i+1, len(nums)):\n            if nums[i] + nums[j] == target:\n                return [i, j]',
+    },
+  ]}
 />
 
-We are mostly working on an introduction to life insurance modeling in Python. Although some of the directories in this book are unrelated.
+We are working an introduction to life insurance modeling in Python, but this project is in its early stages.

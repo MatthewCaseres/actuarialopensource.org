@@ -4,7 +4,13 @@ import { usePython } from 'react-py'
 import type { Packages } from 'react-py/dist/types/Packages'
 
 import Controls from './Controls'
-import { ArrowUpIcon, PlayIcon, StopIcon } from '@heroicons/react/solid'
+import {
+  ArrowUpIcon,
+  CodeBracketIcon,
+  PlayIcon,
+  StopIcon,
+  ArrowPathIcon,
+} from '@heroicons/react/24/solid'
 // require('react-ace').default
 import AceEditor from 'react-ace'
 import 'ace-builds/src-noconflict/mode-python'
