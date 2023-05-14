@@ -33,8 +33,9 @@ function App() {
         ds sfd fs sadf sdf sfd sdfa fd dsfa afds dfsa safd fsda dsaf dsfa sadf
         fsda fdsa dsfa fsad dsaf df
       </div>
-      <CodeEditor tabs={initialTabs} />
+      <CodeEditor id="kjsadhlsajkl" tabs={initialTabs} />
       <CodeEditor
+        id="fs;jkas"
         tabs={[
           {
             title: 'file1',
@@ -51,11 +52,22 @@ function App() {
             title: 'main',
             content: '',
           },
+        ]}
+        id="feas"
+        debug
+      />
+      <CodeEditor
+        tabs={[
+          {
+            title: 'main',
+            content: '',
+          },
           {
             title: 'somefile',
             content: '',
           },
         ]}
+        id="feas"
         debug
       />
     </SidebarLayout>
