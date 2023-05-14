@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import { produce } from 'immer'
 import { TabsProvider, useTabs } from './EditorContext'
+import { useLastEditorId } from './LastEditorContext'
+import Tabs from './Tabs'
 import clsx from 'clsx'
 
 import { PythonProvider, usePython } from 'react-py'
 import type { Packages } from 'react-py/dist/types/Packages'
 import type { Tab } from './EditorContext'
+import { v4 as uuid } from 'uuid'
 
 import Controls from './Controls'
 import {
-  ArrowUpIcon,
   CodeBracketIcon,
   PlayIcon,
   StopIcon,
@@ -21,34 +23,6 @@ import 'ace-builds/src-noconflict/mode-python'
 import 'ace-builds/src-noconflict/theme-textmate'
 import 'ace-builds/src-noconflict/theme-idle_fingers'
 import 'ace-builds/src-noconflict/ext-language_tools'
-
-import PythonSVG from './PythonSVG'
-
-function Tabs() {
-  const {
-    state: { tabIndex, tabs },
-    dispatch,
-  } = useTabs()
-
-  return (
-    <div className="flex text-xs font-semibold ">
-      {tabs.map((tab, i) => (
-        <div
-          key={i}
-          className={`flex select-none items-center border-r
-           ${
-             i === tabIndex ? 'text-neutral-200' : 'text-neutral-400'
-           } border-black bg-neutral-900 p-2 text-center`}
-          style={{ backgroundColor: i == tabIndex ? '#323232' : '' }}
-          onClick={() => dispatch({ type: 'SET_TAB_INDEX', payload: i })}
-        >
-          <PythonSVG />
-          <span>{tab.title + '.py'}</span>
-        </div>
-      ))}
-    </div>
-  )
-}
 
 const editorOptions = {
   enableBasicAutocompletion: true,
@@ -66,19 +40,28 @@ interface CodeEditorProps {
   tabs: Tab[]
   debug?: boolean
   packages?: Packages
+  id: string
 }
 
-export default function CodeEditor2(props: CodeEditorProps) {
+export default function CodeEditor(props: CodeEditorProps) {
+  const { lastEditorId } = useLastEditorId()
   return (
-    <PythonProvider terminateOnCompletion={true} lazy={true}>
+    <PythonProvider
+      terminateOnCompletion={lastEditorId !== props.id}
+      lazy={true}
+    >
       <TabsProvider tabs={props.tabs}>
-        <CodeEditor {...props} />
+        <CodeEditorBase {...props} />
       </TabsProvider>
     </PythonProvider>
   )
 }
 
-function CodeEditor(props: { packages?: Packages; debug?: boolean }) {
+function CodeEditorBase(props: {
+  packages?: Packages
+  debug?: boolean
+  id: string
+}) {
   const {
     state: { tabIndex, tabs },
     initialState,
@@ -86,6 +69,7 @@ function CodeEditor(props: { packages?: Packages; debug?: boolean }) {
   } = useTabs()
   const { packages, debug } = props
   const [showOutput, setShowOutput] = useState(false)
+  const { setLastEditorId } = useLastEditorId()
 
   const {
     runPython,
@@ -106,7 +90,14 @@ function CodeEditor(props: { packages?: Packages; debug?: boolean }) {
     return preamble
   }
 
+  function copyConfig() {
+    navigator.clipboard.writeText(
+      `<CodeEditor id="${uuid()}" tabs={${JSON.stringify(tabs)}} />`
+    )
+  }
+
   function run() {
+    setLastEditorId(props.id)
     runPython(`${writeFilesPreamble()}\n${tabs[tabIndex].content}`)
     setShowOutput(true)
   }
@@ -135,11 +126,7 @@ function CodeEditor(props: { packages?: Packages; debug?: boolean }) {
                   {
                     label: 'ConfigCopy',
                     icon: CodeBracketIcon,
-                    onClick: () => {
-                      navigator.clipboard.writeText(
-                        `<CodeEditor tabs={${JSON.stringify(tabs)}} />`
-                      )
-                    },
+                    onClick: copyConfig,
                   },
                 ]
               : []),

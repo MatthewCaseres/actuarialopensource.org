@@ -99,15 +99,16 @@ In this case we must consider how to specify the discount rate, and see that the
 
 Allows for $O(1)$ lookups of the discount rate for any `t1, t2` pair
 
-      <CodeEditor
-        tabs={[
-          {
-            title: 'main',
-            content:
-              '# pv[i] = v(0, i)\npv = [1, 0.952, 0.924, 0.906, 0.897, 0.831]\n\n# This function is called in O(1) time.\ndef v(i, j):\n    return pv[j]/pv[i]\n\n# interest_rate[i] = interest from i to i+1\ninterest_rate = [v(i, i+1)**-1 - 1 for i in range(len(pv)-1)]\nprint(f"{interest_rate = }")',
-          },
-        ]}
-      />
+<CodeEditor
+  id="ccab4a21-844d-4cc0-9c59-dae9721d227a"
+  tabs={[
+    {
+      title: 'main',
+      content:
+        '# pv[i] = v(0, i)\npv = [1, 0.952, 0.924, 0.906, 0.897, 0.831]\n\n# This function is called in O(1) time.\ndef v(i, j):\n    return pv[j]/pv[i]\n\n# interest_rate[i] = interest from i to i+1\ninterest_rate = [v(i, i+1)**-1 - 1 for i in range(len(pv)-1)]\nprint(f"{interest_rate = }")',
+    },
+  ]}
+/>
 
 ## Present value
 
@@ -132,6 +133,7 @@ To take the present value, $v(t) = e^{-kt}$. Note that for something like an ann
 1. Return an array `arr` of length `n` where `v0[i]` = $v(0, i)$ for a constant `interest_rate`
 
 <CodeEditor
+  id="f9adbd8e-e5f8-4cca-b197-94040c270df6"
   tabs={[
     {
       title: 'main',
@@ -144,6 +146,7 @@ To take the present value, $v(t) = e^{-kt}$. Note that for something like an ann
 2. Given an array `annual_interest_rate[i]` = $v(i, i+1)^{-1}-1$, compute an array `pv[i]` = $v(0, i)$
 
 <CodeEditor
+  id="fc13b088-2eee-4302-9487-e971f5b0bc94"
   tabs={[
     {
       title: 'main',
@@ -160,6 +163,7 @@ $$
 $$
 
 <CodeEditor
+  id="f04d22db-3f51-4286-a205-a27083a1dc30"
   tabs={[
     {
       title: 'main',
@@ -180,6 +184,7 @@ We know some values of $v(t_1, t_2)$, we need to compute the rest of them. The k
 - If possible, construct a data structure in $O(N)$ that provides $O(1)$ lookup of $v(t_1, t_2)$ for any `t1, t2` pair.
 
 <CodeEditor
+  id="dba9f1f9-3ea5-4bf3-94c5-7eba186564f9"
   tabs={[
     {
       title: 'main',
