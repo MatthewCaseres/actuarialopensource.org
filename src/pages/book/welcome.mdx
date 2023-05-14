@@ -19,16 +19,17 @@ Some of our work contains interactive Python playgrounds. The buttons on the top
 The most recently used code editor will execute faster than the others. File imports should work the way you expect them to.
 
 <CodeEditor
-  id="two-sum"
+  id="d4b61647-99e4-43de-86b9-0ae59bbc819c"
   tabs={[
     {
       title: 'main',
-      content: 'from somefile import twoSum\n\nprint(twoSum([2,7,11,15], 9))',
+      content:
+        "import shapes\n\nshapes.draw_triangle(5)\nprint('\\n\\n')\nshapes.draw_square(5)\n",
     },
     {
-      title: 'somefile',
+      title: 'shapes',
       content:
-        'def twoSum(nums: list[int], target: int) -> list[int]:\n    for i in range(len(nums)):\n        for j in range(i+1, len(nums)):\n            if nums[i] + nums[j] == target:\n                return [i, j]',
+        "def draw_triangle(height):\n    for i in range(height):\n        print('  ' * (height - i - 1) + '**' * (2 * i + 1))\n\ndef draw_square(height):\n    for i in range(height):\n        print('**' * height)",
     },
   ]}
 />
