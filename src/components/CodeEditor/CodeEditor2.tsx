@@ -77,6 +77,7 @@ function CodeEditorBase(props: {
     stderr,
     isLoading,
     isRunning,
+    watchModules,
     interruptExecution,
   } = usePython({ packages })
 
@@ -98,6 +99,8 @@ function CodeEditorBase(props: {
 
   function run() {
     setLastEditorId(props.id)
+    // watch the modules
+    watchModules(tabs.map((tab) => tab.title))
     runPython(`${writeFilesPreamble()}\n${tabs[tabIndex].content}`)
     setShowOutput(true)
   }
