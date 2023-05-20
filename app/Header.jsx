@@ -5,7 +5,7 @@ import Link from 'next/link'
 import clsx from 'clsx'
 import { useState, useEffect } from 'react'
 
-import acturary_open_logo from '@/images/actopen.png'
+import acturary_open_logo from './images/actopen.png'
 
 function useScrollDirection() {
   const [scrollDirection, setScrollDirection] = useState(null);
@@ -148,7 +148,7 @@ export function Controls() {
         </div>)
 }
 
-export function Header() {
+export default function Header() {
   const scrollDirection = useScrollDirection();
   return (
     <>

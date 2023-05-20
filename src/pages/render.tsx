@@ -63,7 +63,7 @@ function App() {
             content: '',
           },
           {
-            title: 'somefile',
+            title: 'shapes',
             content: '',
           },
         ]}
