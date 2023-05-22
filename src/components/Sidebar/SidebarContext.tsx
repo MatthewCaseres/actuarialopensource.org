@@ -1,4 +1,4 @@
-import { useReducer, createContext, useContext, Reducer } from 'react'
+import React, { useReducer, createContext, useContext, Reducer } from 'react'
 import { produce, Draft } from 'immer'
 
 export type RawStatefulNode = {

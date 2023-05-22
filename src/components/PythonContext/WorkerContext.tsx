@@ -5,15 +5,17 @@ import React, {
   useEffect,
   ReactNode,
   useState,
+  useCallback,
 } from 'react'
 import { proxy, Remote, wrap } from 'comlink'
 import { Runner, PythonRunner } from './types'
 
 interface WorkerContextProps {
   runner: React.MutableRefObject<Remote<PythonRunner> | undefined>
+  runCode: (code: string, id: string) => Promise<void>
   isLoading: boolean
   pyodideVersion: string | undefined
-  stdout: string
+  output: string[]
 }
 
 // Create the context
@@ -30,15 +32,26 @@ export const WorkerProvider: React.FC<WorkerProviderProps> = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false)
   const [pyodideVersion, setPyodideVersion] = useState<string | undefined>()
   const [output, setOutput] = useState<string[]>([])
-  const [stdout, setStdout] = useState('')
+  const [stderr, setStderr] = useState('')
 
-  // Immediately set stdout upon receiving new input
-  useEffect(() => {
-    if (output.length > 0) {
-      console.log('output', output)
-      setStdout(output.join('\n'))
+  const runCode = useCallback(async (code: string, id: string) => {
+    if (!runnerRef.current) {
+      throw new Error('Pyodide is not loaded')
     }
-  }, [output])
+    try {
+      setOutput([id])
+      await runnerRef.current.run(code)
+    } catch (error) {
+      console.error('Error:', error)
+      setStderr('Traceback (most recent call): \n' + error.message)
+    }
+  }, [])
+  // useEffect to check on stdErr
+  useEffect(() => {
+    if (stderr) {
+      console.log(stderr)
+    }
+  }, [stderr])
 
   useEffect(() => {
     const worker = new Worker(new URL('./python-worker', import.meta.url))
@@ -51,7 +64,6 @@ export const WorkerProvider: React.FC<WorkerProviderProps> = ({ children }) => {
 
         await runner.init(
           proxy((msg: string) => {
-            // Suppress messages that are not useful for the user
             setOutput((prev) => [...prev, msg])
           }),
           proxy(({ version }) => {
@@ -77,13 +89,10 @@ export const WorkerProvider: React.FC<WorkerProviderProps> = ({ children }) => {
     }
   }, [])
 
-  // now runner ref
-  console.log('runnerRef', runnerRef)
-
   // The value provided by the context includes both the worker and functions to interact with it
   return (
     <WorkerContext.Provider
-      value={{ runner: runnerRef, isLoading, pyodideVersion, stdout }}
+      value={{ runner: runnerRef, isLoading, pyodideVersion, output, runCode }}
     >
       {children}
     </WorkerContext.Provider>
