@@ -20,6 +20,7 @@
     "ace-builds": "^1.19.0",
     "autoprefixer": "^10.4.7",
     "clsx": "^1.2.0",
+    "comlink": "^4.4.1",
     "fast-glob": "^3.2.11",
     "feed": "^4.2.2",
     "focus-visible": "^5.2.0",
