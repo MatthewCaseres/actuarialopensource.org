@@ -28,6 +28,14 @@ In this code, a % b computes the remainder when a is divided by b. This operatio
 
 In the first example, the GCD of 48 and 18 is 6, because 6 is the largest number that divides both 48 and 18 without leaving a remainder. In the second and third examples, the GCD is 1, indicating that the numbers are coprime, i.e., they have no common divisors other than 1.
 
+**What is the time complexity of the Euclidean Algorithm?**
+
+The time complexity of the Euclidean Algorithm is O(log(min(a, b))), where a and b are the input integers.
+
+This logarithmic time complexity is due to the fact that the algorithm reduces the problem size approximately by a factor of 2 in each step. Specifically, in each iteration of the algorithm, either a or b becomes at least half of its previous value. Consequently, the number of iterations is proportional to the number of times you can halve the smaller number until you reach 1, which is log(min(a, b)) in base 2.
+
+The Euclidean Algorithm is very efficient even for large numbers, because the number of steps grows slowly (logarithmically) with the size of the input. That's one of the reasons why it's widely used in applications that require computing the greatest common divisor (GCD).
+
 **Could you expand more on this topic using the "Reaching Points" problem as an example?**
 
 Problem Statement:
