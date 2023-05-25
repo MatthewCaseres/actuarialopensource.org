@@ -1,0 +1,44 @@
+import SidebarLayout from '@/components/Sidebar/SidebarLayout'
+
+export default (props) => <SidebarLayout {...props} />
+
+**Can you write a tutorial on the Euclidean algorithm and provide examples with Python?**
+
+The Euclidean Algorithm is a way to find the greatest common divisor (GCD) of two integers. The GCD is the largest number that divides both of the integers without leaving a remainder.
+
+The algorithm works by repeatedly subtracting the smaller number from the larger one, until the two numbers become equal - this will be the GCD. In practice, it's often implemented with division and remainder operations, because they require fewer steps.
+
+Here is the basic form of the Euclidean Algorithm:
+
+1. Let a and b be the two integers where a > b.
+2. Replace a with the remainder when a is divided by b.
+3. Replace b with a and a with the remainder.
+4. If a is zero, the GCD is b. Otherwise, repeat the steps from 2.
+
+<CodeEditor id="cacac963-96b2-451d-91bb-47b520c8d915" tabs={[{"title":"main","content":"def gcd(a, b):\r\n    while b != 0:\r\n        a, b = b, a % b\r\n    return a\r\n    \r\nprint(gcd(48, 18))\r\nprint(gcd(101, 103))\r\nprint(gcd(1111111, 1234567))"}]} />
+
+In this code, a % b computes the remainder when a is divided by b. This operation corresponds to step 2 of the algorithm above. The while loop keeps repeating this operation until b is zero, at which point a will be the GCD, as per step 4.
+
+In the first example, the GCD of 48 and 18 is 6, because 6 is the largest number that divides both 48 and 18 without leaving a remainder. In the second and third examples, the GCD is 1, indicating that the numbers are coprime, i.e., they have no common divisors other than 1.
+
+**Could you expand more on this topic using the "Reaching Points" problem as an example?**
+
+Problem Statement:
+
+A move consists of taking a point (x, y) and transforming it to either (x, x+y) or (x+y, y). Given a starting point (sx, sy) and a target point (tx, ty), return true if and only if a sequence of moves exists to transform the point (sx, sy) to (tx, ty). Otherwise, return false.
+
+Euclidean Algorithm Approach:
+
+Instead of moving from the start point to the target, consider moving backwards from the target to the start point. While the target point is larger than the start point, we can always go back to the previous step. If we reach a point where tx=ty, then it's not possible to go back any further.
+
+<CodeEditor id="19d10f0d-4801-492e-9643-a2baceb6c6ef" tabs={[{"title":"main","content":"def reachingPoints(sx, sy, tx, ty):\r\n    while sx < tx and sy < ty:\r\n        if tx < ty:\r\n            ty %= tx\r\n        else:\r\n            tx %= ty\r\n\r\n    return (sx == tx and sy <= ty and (ty - sy) % sx == 0) or (sy == ty and sx <= tx and (tx - sx) % sy == 0)\r\n\r\nprint(reachingPoints(1, 1, 3, 5))\r\nprint(reachingPoints(1, 1, 2, 2))\r\nprint(reachingPoints(1, 1, 1, 1))"}]} />
+
+Explanation:
+
+The while loop runs as long as both sx < tx and sy < ty. Inside the loop, we take the remainder of ty with tx if tx < ty, else we take the remainder of tx with ty. This operation reduces the larger of tx and ty, making the problem size smaller at each step. This corresponds to moving backwards from the target point to the start point.
+
+After the while loop, we check if the start point matches the current target point. If sx matches tx, then we also need to check if sy is less than or equal to ty and if the difference ty - sy is a multiple of sx (to make sure that we could have gotten from (sx, sy) to (tx, ty) by increasing sy by sx several times). If sy matches ty, then we do a similar check for sx and tx.
+
+In the first example, we can get from (1, 1) to (3, 5) with the moves (1, 1) -> (1, 2) -> (3, 2) -> (3, 5). In the second example, there's no way to get from (1, 1) to (2, 2), because we can't increase both x and y at the same time. In the third example, we are already at the target point, so no moves are needed.
+
+Remember that this solution works by moving backwards from the target to the start. If we trace the first example in reverse, we have (3, 5) -> (3, 2) -> (1, 2) -> (1, 1), which shows how the tx, ty coordinates are reduced at each step by subtracting ty from tx or vice versa.
