@@ -1,5 +1,12 @@
 import SidebarLayout from '@/components/Sidebar/SidebarLayout'
+import dynamic from 'next/dynamic'
 
+export const CodeEditor = dynamic(
+  () => import('@/components/CodeEditor/CodeEditor'),
+  {
+    ssr: false,
+  }
+)
 export default (props) => <SidebarLayout {...props} />
 
 **Can you write a tutorial on the Euclidean algorithm and provide examples with Python?**
