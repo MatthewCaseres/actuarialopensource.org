@@ -142,6 +142,10 @@ const rawNodes: RawStatefulNode[] = [
         title: 'Poisson processes',
         url: '/book/gpt-4/01-poisson',
       },
+      {
+        title: 'Euclidean algorithm',
+        url: '/book/gpt-4/euclid',
+      },
     ],
   },
 ]
