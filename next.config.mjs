@@ -14,6 +14,11 @@ const nextConfig = {
     newNextLinkBehavior: true,
     scrollRestoration: true,
   },
+  i18n: {
+    //supported languages
+    locales: ['en-US', 'es-ES', 'zh-CN'],
+    defaultLocale: 'en-US',
+  },
 }
 
 const withMDX = nextMDX({
