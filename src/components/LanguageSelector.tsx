@@ -15,7 +15,7 @@ function LanguageButton({
     <button
       className={`rounded ${
         isActive
-          ? 'bg-gray-800 text-white dark:bg-gray-100 dark:text-black'
+          ? 'bg-gray-700 text-white dark:bg-gray-300 dark:text-black'
           : 'bg-gray-100 dark:bg-gray-800 dark:text-white'
       } px-4 py-2`}
     >
@@ -26,7 +26,7 @@ function LanguageButton({
 
 const LanguageSelector = () => {
   return (
-    <div className="flex space-x-4 p-4">
+    <div className="flex justify-center space-x-4 p-4">
       <Link href="/en">
         <LanguageButton targetLocale="en" label="English" />
       </Link>

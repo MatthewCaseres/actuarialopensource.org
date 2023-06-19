@@ -2,6 +2,7 @@ import LinkedIn from '@/images/LinkedIn'
 import TechBook from '@/images/TechBook'
 import Link from 'next/link'
 import { useIntl, FormattedMessage } from 'react-intl'
+import LanguageSelector from './LanguageSelector'
 
 const HeroButton: React.FC<{
   title: string
@@ -27,13 +28,16 @@ export function Hero() {
                 <FormattedMessage id="actuarial" defaultMessage="Actuarial" />
               </span>{' '}
               <span className="block xl:inline">
-                <FormattedMessage id="open_source" defaultMessage="Open Source" />
+                <FormattedMessage
+                  id="open_source"
+                  defaultMessage="Open Source"
+                />
               </span>
             </h1>
             <p className="mx-auto my-3 max-w-md text-base sm:text-lg md:my-5 md:max-w-3xl md:text-xl">
-              <FormattedMessage 
-                id="tagline" 
-                defaultMessage="A community of actuaries and developers building open source actuarial software." 
+              <FormattedMessage
+                id="tagline"
+                defaultMessage="A community of actuaries and developers building open source actuarial software."
               />
             </p>
             <div className="mx-auto mt-10 flex flex-col items-center justify-center sm:flex-row sm:space-x-3 ">
@@ -57,6 +61,7 @@ export function Hero() {
                 </HeroButton>
               </Link>
             </div>
+            <LanguageSelector />
           </div>
         </main>
       </div>

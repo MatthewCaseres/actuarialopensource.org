@@ -22,7 +22,9 @@ const allMessages = {
   'zh': cnMessages,
 }
 
-export default function Home({ repos }) {
+export default function Home({ 
+  repos 
+}) {
   const { locale } = useRouter()
   return (
     <IntlProvider locale={locale} messages={allMessages[locale]}>
