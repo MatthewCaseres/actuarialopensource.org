@@ -12,19 +12,18 @@ import { ProjectGrid } from '@/components/ProjectGrid'
 import { useRouter } from 'next/router'
 import { IntlProvider } from 'react-intl'
 
-import enMessages from '../langs/en-US'
-import esMessages from '../langs/es-ES'
-import cnMessages from '../langs/zh-CN'
+import enMessages from '../langs/en'
+import esMessages from '../langs/es'
+import cnMessages from '../langs/zh'
 
 const allMessages = {
-  'en-US': enMessages,
-  'es-ES': esMessages,
-  'zh-CN': cnMessages,
+  'en': enMessages,
+  'es': esMessages,
+  'zh': cnMessages,
 }
 
 export default function Home({ repos }) {
-  const router = useRouter()
-  const { locale } = router
+  const { locale } = useRouter()
   return (
     <IntlProvider locale={locale} messages={allMessages[locale]}>
       <>
