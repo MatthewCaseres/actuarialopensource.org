@@ -116,6 +116,7 @@ export const repoUrls: string[] = [
   'https://github.com/fumitoh/lifelib',
   'https://github.com/fumitoh/modelx',
   'https://github.com/mages/ChainLadder',
-  'https://github.com/amvillegas/StMoMo',
   'https://github.com/vigou3/actuar',
+  'https://github.com/A1arcon/R_Actuarial',
 ]
+// 'https://github.com/amvillegas/StMoMo',

@@ -1,6 +1,7 @@
 import { StarIcon } from '@heroicons/react/24/outline'
 import { VscRepoForked } from 'react-icons/vsc'
 import { FlatQuery } from '@/lib/query'
+import { useIntl, FormattedMessage } from 'react-intl'
 
 function Lang({ repo }) {
   return (
@@ -15,10 +16,14 @@ function Lang({ repo }) {
 }
 
 export function ProjectGrid({ repos }) {
+  const intl = useIntl()
   return (
     <div className="mx-auto max-w-7xl divide-y-2 divide-gray-200 px-4  sm:px-6 lg:px-8">
       <h2 className="text-3xl font-extrabold text-gray-900 dark:text-zinc-100">
-        Open source software by actuaries
+        <FormattedMessage 
+          id="open_source_by_actuaries" 
+          defaultMessage="Open source software by actuaries" 
+        />
       </h2>
       <div>
         <ul
@@ -61,7 +66,10 @@ export function ProjectGrid({ repos }) {
             ))}
         </ul>
         <div className="px-5 pt-5 text-zinc-600 dark:text-zinc-400">
-          The stars and forks update automatically every two minutes.
+          <FormattedMessage 
+            id="stars_forks_update" 
+            defaultMessage="The stars and forks update automatically every two minutes." 
+          />
         </div>
       </div>
     </div>

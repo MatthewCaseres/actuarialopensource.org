@@ -9,26 +9,43 @@ import { Hero } from '@/components/Hero'
 // import { generateRssFeed } from '@/lib/generateRssFeed'
 import { getReposFlat, repoUrls } from '@/lib/query'
 import { ProjectGrid } from '@/components/ProjectGrid'
+import { useRouter } from 'next/router'
+import { IntlProvider } from 'react-intl'
 
-export default function Home({ repos }) {
+import enMessages from '../langs/en'
+import esMessages from '../langs/es'
+import cnMessages from '../langs/zh'
+
+const allMessages = {
+  'en': enMessages,
+  'es': esMessages,
+  'zh': cnMessages,
+}
+
+export default function Home({ 
+  repos 
+}) {
+  const { locale } = useRouter()
   return (
-    <>
-      <Head>
-        <title>Actuarial Open Source Community</title>
-        <meta
-          name="description"
-          content="A community of actuaries and developers building open source
-              actuarial software."
-        />
-      </Head>
-      <Hero />
-      <Container className="mt-16">
-        <ProjectGrid repos={repos} />
-      </Container>
-      <Container className="mt-5">
-        <Quotes />
-      </Container>
-    </>
+    <IntlProvider locale={locale} messages={allMessages[locale]}>
+      <>
+        <Head>
+          <title>Actuarial Open Source Community</title>
+          <meta
+            name="description"
+            content="A community of actuaries and developers building open source
+                actuarial software." 
+          />
+        </Head>
+        <Hero />
+        <Container className="mt-16">
+          <ProjectGrid repos={repos} />
+        </Container>
+        <Container className="mt-5">
+          <Quotes />
+        </Container>
+      </>
+    </IntlProvider>
   )
 }
 
