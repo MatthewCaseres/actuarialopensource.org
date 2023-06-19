@@ -4,7 +4,7 @@ export default {
     "tagline": "Una comunidad de actuarios y desarrolladores que construyen software actuarial de código abierto.",
     "open_source_by_actuaries": "Software de código abierto por actuarios",
     "stars_forks_update": "Las estrellas y los forks se actualizan automáticamente cada dos minutos.",
-    "join_us": "Únete a nosotros",
+    "join_us": "LinkedIn",
     "education": "Educación",
     // Quotes
     "what_people_say": "Lo que la gente dice sobre el código abierto",

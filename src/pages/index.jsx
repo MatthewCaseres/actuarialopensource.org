@@ -12,9 +12,9 @@ import { ProjectGrid } from '@/components/ProjectGrid'
 import { useRouter } from 'next/router'
 import { IntlProvider } from 'react-intl'
 
-import enMessages from './langs/en-US'
-import esMessages from './langs/es-ES'
-import cnMessages from './langs/zh-CN'
+import enMessages from '../langs/en-US'
+import esMessages from '../langs/es-ES'
+import cnMessages from '../langs/zh-CN'
 
 const allMessages = {
   'en-US': enMessages,
