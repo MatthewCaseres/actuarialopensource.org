@@ -6,6 +6,11 @@ export default {
     "stars_forks_update": "Las estrellas y los forks se actualizan automáticamente cada dos minutos.",
     "join_us": "LinkedIn",
     "education": "Educación",
+    // ¿Por qué actuarial de código abierto?
+    "why?": "¿Por Qué Actuarial de Código Abierto?",
+    "ans1": "El código abierto permite investigaciones reproducibles en ciencias actuariales. Los datos abiertos y las plataformas de computación no propietarias permiten que cualquiera replique resultados, creando transparencia y confianza en los mismos.",
+    "ans2": "El código abierto hace que las ciencias actuariales sean accesibles al convertir el argot actuarial y los símbolos en código que puede ser entendido por un público más amplio.",
+    "ans3": "El código abierto crea un espacio colaborativo para que profesionales, académicos y entusiastas se unan.",
     // Quotes
     "what_people_say": "Lo que la gente dice sobre el código abierto",
     "quote1": "El código abierto se trata de colaborar; no competir.",

@@ -6,6 +6,11 @@ export default {
     "stars_forks_update": "The stars and forks update automatically every two minutes.",
     "join_us": "Join Us",
     "education": "Education",
+    // Why actuarial open source?
+    "why?": "Why Actuarial Open Source?",
+    "ans1": "Open source allows for reproducible research in actuarial science. Open data and non-proprietary computing platforms allow anyone to replicate results, creating transparency and trust in results.",
+    "ans2": "Open source makes actuarial science accessible by turning actuarial jargon and symbols into code which can be understood by a wider audience.",
+    "ans3": "Open source creates a collaborative space for professionals, academics, and enthusiasts to come together.",
     // Quotes
     "what_people_say": "What people are saying about open source",
     "quote1": "Open source is about collaborating; not competing.",
