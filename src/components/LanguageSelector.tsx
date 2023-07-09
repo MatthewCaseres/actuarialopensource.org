@@ -36,7 +36,7 @@ const LanguageSelector = () => {
       <Link href="/zh">
         <LanguageButton targetLocale="zh" label="中文" />
       </Link>
-      <Link href="/de">
+      {/* <Link href="/de">
         <LanguageButton targetLocale="de" label="Deutsch" />
       </Link>
       <Link href="/fr">
@@ -50,7 +50,7 @@ const LanguageSelector = () => {
       </Link>
       <Link href="/pt-br">
         <LanguageButton targetLocale="pt-br" label="Português" />
-      </Link>
+      </Link> */}
     </div>
   )
 }

@@ -32,11 +32,7 @@ const allMessages = {
   'pt-br': ptMessages,
 }
 
-export default function Home(
-  {
-    // repos
-  }
-) {
+export default function Home({ repos }) {
   const { locale } = useRouter()
   return (
     <IntlProvider locale={locale} messages={allMessages[locale]}>
@@ -53,9 +49,9 @@ export default function Home(
         <Container className="mt-5">
           <WhyOpenSource />
         </Container>
-        {/* <Container className="mt-3">
+        <Container className="mt-3">
           <ProjectGrid repos={repos} />
-        </Container> */}
+        </Container>
         <Container className="mt-5">
           <Quotes />
         </Container>
@@ -64,15 +60,15 @@ export default function Home(
   )
 }
 
-// export async function getStaticProps() {
-//   //   if (process.env.NODE_ENV === 'production') {
-//   //     await generateRssFeed()
-//   //   }
-//   const repos = await getReposFlat(repoUrls)
-//   return {
-//     props: {
-//       repos: repos,
-//     },
-//     revalidate: 120,
-//   }
-// }
+export async function getStaticProps() {
+  //   if (process.env.NODE_ENV === 'production') {
+  //     await generateRssFeed()
+  //   }
+  const repos = await getReposFlat(repoUrls)
+  return {
+    props: {
+      repos: repos,
+    },
+    revalidate: 120,
+  }
+}
