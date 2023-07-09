@@ -1,34 +1,37 @@
-import Image from 'next/future/image'
+import Image from 'next/image'
 import Link from 'next/link'
 import clsx from 'clsx'
 import { useState, useEffect } from 'react'
+import LinkedIn from '@/images/LinkedIn'
 
 import acturary_open_logo from '@/images/actopen.png'
+import SvgGithub from '@/images/GitHub'
 
 function useScrollDirection() {
-  const [scrollDirection, setScrollDirection] = useState(null);
+  const [scrollDirection, setScrollDirection] = useState(null)
 
   useEffect(() => {
-    let lastScrollY = window.pageYOffset;
+    let lastScrollY = window.pageYOffset
 
     const updateScrollDirection = () => {
-      const scrollY = window.pageYOffset;
-      const direction = scrollY > lastScrollY ? "down" : "up";
-      if (direction !== scrollDirection && (scrollY - lastScrollY > 10 || scrollY - lastScrollY < -10)) {
-        setScrollDirection(direction);
+      const scrollY = window.pageYOffset
+      const direction = scrollY > lastScrollY ? 'down' : 'up'
+      if (
+        direction !== scrollDirection &&
+        (scrollY - lastScrollY > 10 || scrollY - lastScrollY < -10)
+      ) {
+        setScrollDirection(direction)
       }
-      lastScrollY = scrollY > 0 ? scrollY : 0;
-    };
-    window.addEventListener("scroll", updateScrollDirection); // add event listener
-    return () => {
-      window.removeEventListener("scroll", updateScrollDirection); // clean up
+      lastScrollY = scrollY > 0 ? scrollY : 0
     }
-  }, [scrollDirection]);
+    window.addEventListener('scroll', updateScrollDirection) // add event listener
+    return () => {
+      window.removeEventListener('scroll', updateScrollDirection) // clean up
+    }
+  }, [scrollDirection])
 
-  return scrollDirection;
-};
-
-
+  return scrollDirection
+}
 
 function SunIcon(props) {
   return (
@@ -61,8 +64,6 @@ function MoonIcon(props) {
     </svg>
   )
 }
-
-
 
 function ModeToggle() {
   function disableTransitionsTemporarily() {
@@ -134,24 +135,47 @@ function Avatar({ large = false, className, ...props }) {
 }
 
 export function Controls() {
- return (<div className='flex flex-row justify-start space-x-4 p-3 bg-white dark:bg-black '>
-              <div>
-                <AvatarContainer>
-                  <Avatar />
-                </AvatarContainer>
-              </div>
-                <div className="pointer-events-auto">
-                  <ModeToggle />
-                </div>
-        </div>)
+  return (
+    <div className="flex flex-row justify-between space-x-4 bg-white p-3 dark:bg-black ">
+      <div className="flex flex-row">
+        <div>
+          <AvatarContainer>
+            <Avatar />
+          </AvatarContainer>
+        </div>
+        <div className="pointer-events-auto">
+          <ModeToggle />
+        </div>
+      </div>
+      <div className="flex flex-row space-x-3">
+        <a
+          href="https://www.linkedin.com/groups/13937070/"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <LinkedIn height={30} width={30} alt="LinkedIn Logo" />
+        </a>
+        <a
+          href="https://github.com/actuarialopensource"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <SvgGithub height={30} width={30} alt="GitHub Logo" />
+        </a>
+      </div>
+    </div>
+  )
 }
 
 export function Header() {
-  const scrollDirection = useScrollDirection();
+  const scrollDirection = useScrollDirection()
   return (
     <>
       <header
-      className={`sticky ${ scrollDirection === "down" ? "-top-24" : "top-0"}  transition-all h-0 z-20 duration-500 border-b border-gray-100 dark:border-gray-700`}>
+        className={`sticky ${
+          scrollDirection === 'down' ? '-top-24' : 'top-0'
+        }  z-20 h-0 border-b border-gray-100 transition-all duration-500 dark:border-gray-700`}
+      >
         <Controls />
       </header>
     </>

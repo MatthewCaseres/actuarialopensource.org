@@ -1,11 +1,10 @@
-import Image from 'next/future/image'
 import Head from 'next/head'
 import Link from 'next/link'
 import clsx from 'clsx'
 
 import { Container } from '@/components/Container'
 import { Quotes } from '../components/Quotes'
-import { Hero } from '@/components/Hero'
+import { Hero } from '../components/Hero'
 // import { generateRssFeed } from '@/lib/generateRssFeed'
 import { getReposFlat, repoUrls } from '@/lib/query'
 import { ProjectGrid } from '@/components/ProjectGrid'
@@ -23,19 +22,21 @@ import ptMessages from '../langs/pt-br'
 import { WhyOpenSource } from '../components/WhyOpenSource'
 
 const allMessages = {
-  'en': enMessages,
-  'es': esMessages,
-  'zh': cnMessages,
-  'de': deMessages,
-  'fr': frMessages,
-  'ja': jaMessages,
-  'hi': hiMessages,
+  en: enMessages,
+  es: esMessages,
+  zh: cnMessages,
+  de: deMessages,
+  fr: frMessages,
+  ja: jaMessages,
+  hi: hiMessages,
   'pt-br': ptMessages,
 }
 
-export default function Home({ 
-  repos 
-}) {
+export default function Home(
+  {
+    // repos
+  }
+) {
   const { locale } = useRouter()
   return (
     <IntlProvider locale={locale} messages={allMessages[locale]}>
@@ -45,16 +46,16 @@ export default function Home({
           <meta
             name="description"
             content="A community of actuaries and developers building open source
-                actuarial software." 
+                actuarial software."
           />
         </Head>
         <Hero />
         <Container className="mt-5">
           <WhyOpenSource />
         </Container>
-        <Container className="mt-3">
+        {/* <Container className="mt-3">
           <ProjectGrid repos={repos} />
-        </Container>
+        </Container> */}
         <Container className="mt-5">
           <Quotes />
         </Container>
@@ -63,15 +64,15 @@ export default function Home({
   )
 }
 
-export async function getStaticProps() {
-  //   if (process.env.NODE_ENV === 'production') {
-  //     await generateRssFeed()
-  //   }
-  const repos = await getReposFlat(repoUrls)
-  return {
-    props: {
-      repos: repos,
-    },
-    revalidate: 120,
-  }
-}
+// export async function getStaticProps() {
+//   //   if (process.env.NODE_ENV === 'production') {
+//   //     await generateRssFeed()
+//   //   }
+//   const repos = await getReposFlat(repoUrls)
+//   return {
+//     props: {
+//       repos: repos,
+//     },
+//     revalidate: 120,
+//   }
+// }

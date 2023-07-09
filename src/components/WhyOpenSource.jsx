@@ -10,10 +10,11 @@ export function WhyOpenSource() {
       </h2>
       <ol className="text-lg text-zinc-800 dark:text-zinc-100">
         <li>
-          <FormattedMessage id={'ans1'} />
+          <FormattedMessage id={'ans2'} />
+          {/* ans2 before ans1 due to refactor */}
         </li>
         <li>
-          <FormattedMessage id={'ans2'} />
+          <FormattedMessage id={'ans1'} />
         </li>
         <li>
           <FormattedMessage id={'ans3'} />

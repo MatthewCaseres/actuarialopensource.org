@@ -6,12 +6,10 @@ import LanguageSelector from './LanguageSelector'
 
 const HeroButton: React.FC<{
   title: string
-  children?: React.ReactNode
-}> = ({ title, children }) => {
+}> = ({ title }) => {
   return (
     <div className="mb-2 flex w-40 flex-row items-center justify-center border border-gray-300 p-2 shadow-md dark:border-gray-500">
       {title}
-      <div className="ml-4">{children}</div>
     </div>
   )
 }
@@ -41,24 +39,8 @@ export function Hero() {
               />
             </p>
             <div className="mx-auto mt-10 flex flex-col items-center justify-center sm:flex-row sm:space-x-3 ">
-              <a
-                href="https://www.linkedin.com/groups/13937070/"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <HeroButton title={intl.formatMessage({ id: 'join_us' })}>
-                  <LinkedIn height={30} width={30} alt="LinkedIn Logo" />
-                </HeroButton>
-              </a>
-              <Link href="/book/welcome">
-                <HeroButton title={intl.formatMessage({ id: 'education' })}>
-                  <TechBook
-                    className="fill-sky-700"
-                    height={30}
-                    width={30}
-                    alt="LinkedIn Logo"
-                  />
-                </HeroButton>
+              <Link href="/joinus">
+                <HeroButton title={intl.formatMessage({ id: 'join_us' })} />
               </Link>
             </div>
             <LanguageSelector />
@@ -67,9 +49,4 @@ export function Hero() {
       </div>
     </div>
   )
-}
-{
-  /* <a
-href="https://www.linkedin.com/groups/13937070/"
-> */
 }
