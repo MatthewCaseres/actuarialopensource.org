@@ -1,0 +1,134 @@
+[
+  {
+    "description": "Actuarial reserving in Python",
+    "forks": 60,
+    "stars": 143,
+    "name": "chainladder-python",
+    "url": "https://github.com/casact/chainladder-python",
+    "rate": 1,
+    "limit": 5000,
+    "language": "Python",
+    "color": "#3572A5"
+  },
+  {
+    "description": "Python package of actuarial models, tools, examples and learning materials.",
+    "forks": 34,
+    "stars": 112,
+    "name": "lifelib",
+    "url": "https://github.com/lifelib-dev/lifelib",
+    "rate": 1,
+    "limit": 5000,
+    "language": "Jupyter Notebook",
+    "color": "#DA5B0B"
+  },
+  {
+    "description": "Loss modelling framework.",
+    "forks": 40,
+    "stars": 104,
+    "name": "OasisLMF",
+    "url": "https://github.com/OasisLMF/OasisLMF",
+    "rate": 1,
+    "limit": 5000,
+    "language": "Python",
+    "color": "#3572A5"
+  },
+  {
+    "description": "Claims reserving models in R",
+    "forks": 61,
+    "stars": 70,
+    "name": "ChainLadder",
+    "url": "https://github.com/mages/ChainLadder",
+    "rate": 1,
+    "limit": 5000,
+    "language": "R",
+    "color": "#198CE7"
+  },
+  {
+    "description": "Use Python like a spreadsheet!",
+    "forks": 14,
+    "stars": 69,
+    "name": "modelx",
+    "url": "https://github.com/fumitoh/modelx",
+    "rate": 1,
+    "limit": 5000,
+    "language": "Python",
+    "color": "#3572A5"
+  },
+  {
+    "description": "El objetivo de este repositorio es brindar un apoyo a la comunidad interesada en mejorar sus técnicas en el lenguaje de programación R o emprenderlo desde un punto de vista muy aplicado.  Un repositorio con códigos de R para aplicaciones actuariales: probabilidad, estadística, riesgo y finanzas.",
+    "forks": 13,
+    "stars": 69,
+    "name": "R_Actuarial",
+    "url": "https://github.com/A1arcon/R_Actuarial",
+    "rate": 1,
+    "limit": 5000,
+    "language": "R",
+    "color": "#198CE7"
+  },
+  {
+    "description": "Loss Data Analytics is an interactive, online, freely available text. It provides core training on one of the foundations of actuarial science, loss data modeling. ",
+    "forks": 38,
+    "stars": 46,
+    "name": "Loss-Data-Analytics",
+    "url": "https://github.com/OpenActTexts/Loss-Data-Analytics",
+    "rate": 1,
+    "limit": 5000,
+    "language": "JavaScript",
+    "color": "#f1e05a"
+  },
+  {
+    "description": "A fully `Distributions.jl`-compliant copula package",
+    "forks": 3,
+    "stars": 43,
+    "name": "Copulas.jl",
+    "url": "https://github.com/lrnv/Copulas.jl",
+    "rate": 1,
+    "limit": 5000,
+    "language": "Julia",
+    "color": "#a270ba"
+  },
+  {
+    "description": "Life Actuarial Maths",
+    "forks": 10,
+    "stars": 32,
+    "name": "LifeContingencies.jl",
+    "url": "https://github.com/JuliaActuary/LifeContingencies.jl",
+    "rate": 1,
+    "limit": 5000,
+    "language": "Julia",
+    "color": "#a270ba"
+  },
+  {
+    "description": "Common functions in actuarial and financial routines",
+    "forks": 8,
+    "stars": 27,
+    "name": "ActuaryUtilities.jl",
+    "url": "https://github.com/JuliaActuary/ActuaryUtilities.jl",
+    "rate": 1,
+    "limit": 5000,
+    "language": "Julia",
+    "color": "#a270ba"
+  },
+  {
+    "description": "Hello!",
+    "forks": 3,
+    "stars": 22,
+    "name": "actuarialopensource.org",
+    "url": "https://github.com/actuarialopensource/actuarialopensource.org",
+    "rate": 1,
+    "limit": 5000,
+    "language": "MDX",
+    "color": "#fcb32c"
+  },
+  {
+    "description": "Actuarial functions and heavy tailed distributions for R",
+    "forks": 7,
+    "stars": 22,
+    "name": "actuar",
+    "url": "https://github.com/vigou3/actuar",
+    "rate": 1,
+    "limit": 5000,
+    "language": "C",
+    "color": "#555555"
+  }
+]

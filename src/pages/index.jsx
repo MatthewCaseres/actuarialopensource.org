@@ -10,6 +10,7 @@ import { getReposFlat, repoUrls } from '@/lib/query'
 import { ProjectGrid } from '@/components/ProjectGrid'
 import { useRouter } from 'next/router'
 import { IntlProvider } from 'react-intl'
+import repos from '../langs/q.json'
 
 import enMessages from '../langs/en'
 import esMessages from '../langs/es'
@@ -32,7 +33,7 @@ const allMessages = {
   'pt-br': ptMessages,
 }
 
-export default function Home({ repos }) {
+export default function Home({}) {
   const { locale } = useRouter()
   return (
     <IntlProvider locale={locale} messages={allMessages[locale]}>
@@ -46,6 +47,13 @@ export default function Home({ repos }) {
           />
         </Head>
         <Hero />
+        <button
+          onClick={() => {
+            console.log(repos)
+          }}
+        >
+          FUCKIT
+        </button>
         <Container className="mt-5">
           <WhyOpenSource />
         </Container>
@@ -60,15 +68,15 @@ export default function Home({ repos }) {
   )
 }
 
-export async function getStaticProps() {
-  //   if (process.env.NODE_ENV === 'production') {
-  //     await generateRssFeed()
-  //   }
-  const repos = await getReposFlat(repoUrls)
-  return {
-    props: {
-      repos: repos,
-    },
-    revalidate: 120,
-  }
-}
+// export async function getStaticProps() {
+//   //   if (process.env.NODE_ENV === 'production') {
+//   //     await generateRssFeed()
+//   //   }
+//   const repos = await getReposFlat(repoUrls)
+//   return {
+//     props: {
+//       repos: repos,
+//     },
+//     revalidate: 120,
+//   }
+// }
