@@ -1,21 +1,35 @@
 import { useEffect, useRef } from 'react'
 
 import { Header } from '@/components/Header'
-import {LastEditorIdProvider} from '../components/CodeEditor/LastEditorContext'
+import { LastEditorIdProvider } from '../components/CodeEditor/LastEditorContext'
 
-import { Analytics } from '@vercel/analytics/react';
+import { Analytics } from '@vercel/analytics/react'
+import { IntlProvider } from 'react-intl'
 
 import '@/styles/tailwind.css'
 import 'focus-visible'
 
 import dynamic from 'next/dynamic'
 
-const PythonProvider = dynamic(
-  () => import('react-py').then((module) => module.PythonProvider),
-  {
-    ssr: false
-  }
-)
+import enMessages from '../langs/en'
+import esMessages from '../langs/es'
+import cnMessages from '../langs/zh'
+import deMessages from '../langs/de'
+import frMessages from '../langs/fr'
+import jaMessages from '../langs/ja'
+import hiMessages from '../langs/hi'
+import ptMessages from '../langs/pt-br'
+
+const allMessages = {
+  en: enMessages,
+  es: esMessages,
+  zh: cnMessages,
+  de: deMessages,
+  fr: frMessages,
+  ja: jaMessages,
+  hi: hiMessages,
+  'pt-br': ptMessages,
+}
 
 function usePrevious(value) {
   let ref = useRef()
@@ -29,6 +43,7 @@ function usePrevious(value) {
 
 export default function App({ Component, pageProps, router }) {
   let previousPathname = usePrevious(router.pathname)
+  const { locale } = router
 
   return (
     <>
@@ -39,12 +54,14 @@ export default function App({ Component, pageProps, router }) {
       </div>
       <div className="relative">
         <Header />
-        <LastEditorIdProvider>
-        <main>
-          <Component previousPathname={previousPathname} {...pageProps} />
-          <Analytics />
-        </main>
-        </LastEditorIdProvider>
+        <IntlProvider locale={locale} messages={allMessages[locale]}>
+          <LastEditorIdProvider>
+            <main>
+              <Component previousPathname={previousPathname} {...pageProps} />
+              <Analytics />
+            </main>
+          </LastEditorIdProvider>
+        </IntlProvider>
       </div>
     </>
   )
