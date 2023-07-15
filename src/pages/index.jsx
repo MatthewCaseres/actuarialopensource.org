@@ -6,11 +6,13 @@ import { Container } from '@/components/Container'
 import { Quotes } from '../components/Quotes'
 import { Hero } from '../components/Hero'
 // import { generateRssFeed } from '@/lib/generateRssFeed'
-import { getReposFlat, repoUrls } from '@/lib/query'
+
 import { ProjectGrid } from '@/components/ProjectGrid'
 import { useRouter } from 'next/router'
 import { IntlProvider } from 'react-intl'
 import repos from '../langs/q.json'
+import { reposConfig } from '../lib/query'
+import { FlatWithCategory, getReposFlat } from '../lib/query'
 
 import enMessages from '../langs/en'
 import esMessages from '../langs/es'
@@ -33,7 +35,7 @@ const allMessages = {
   'pt-br': ptMessages,
 }
 
-export default function Home({}) {
+export default function Home({ repos }) {
   const { locale } = useRouter()
   return (
     <IntlProvider locale={locale} messages={allMessages[locale]}>
@@ -47,13 +49,6 @@ export default function Home({}) {
           />
         </Head>
         <Hero />
-        <button
-          onClick={() => {
-            console.log(repos)
-          }}
-        >
-          FUCKIT
-        </button>
         <Container className="mt-5">
           <WhyOpenSource />
         </Container>
@@ -68,15 +63,16 @@ export default function Home({}) {
   )
 }
 
-// export async function getStaticProps() {
-//   //   if (process.env.NODE_ENV === 'production') {
-//   //     await generateRssFeed()
-//   //   }
-//   const repos = await getReposFlat(repoUrls)
-//   return {
-//     props: {
-//       repos: repos,
-//     },
-//     revalidate: 120,
-//   }
-// }
+export async function getStaticProps() {
+  //   if (process.env.NODE_ENV === 'production') {
+  //     await generateRssFeed()
+  //   }
+  // truncate to only have six repos from the repoConfig
+  const repos = await getReposFlat(reposConfig.slice(0, 6))
+  return {
+    props: {
+      repos: repos,
+    },
+    revalidate: 120,
+  }
+}

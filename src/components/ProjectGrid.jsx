@@ -3,7 +3,7 @@ import { VscRepoForked } from 'react-icons/vsc'
 import { FlatQuery } from '@/lib/query'
 import { useIntl, FormattedMessage } from 'react-intl'
 
-function Lang({ repo }) {
+export function Lang({ repo }) {
   return (
     <>
       <span
@@ -20,9 +20,9 @@ export function ProjectGrid({ repos }) {
   return (
     <div className="mx-auto max-w-7xl divide-y-2 divide-gray-200 px-4  sm:px-6 lg:px-8">
       <h2 className="text-3xl font-extrabold text-gray-900 dark:text-zinc-100">
-        <FormattedMessage 
-          id="open_source_by_actuaries" 
-          defaultMessage="Open source software by actuaries" 
+        <FormattedMessage
+          id="open_source_by_actuaries"
+          defaultMessage="Open source software by actuaries"
         />
       </h2>
       <div>
@@ -40,7 +40,7 @@ export function ProjectGrid({ repos }) {
                 <a target="_blank" rel="noopener noreferrer" href={repo.url}>
                   <div>
                     {/* <div className="flex items-center justify-center truncate p-3"> */}
-                    <h3 className="truncate  p-3 font-medium text-blue-700 dark:text-blue-500 group-hover:underline">
+                    <h3 className="truncate  p-3 font-medium text-blue-700 group-hover:underline dark:text-blue-500">
                       {repo.name}
                     </h3>
                     {/* </div> */}
@@ -66,9 +66,9 @@ export function ProjectGrid({ repos }) {
             ))}
         </ul>
         <div className="px-5 pt-5 text-zinc-600 dark:text-zinc-400">
-          <FormattedMessage 
-            id="stars_forks_update" 
-            defaultMessage="The stars and forks update automatically every two minutes." 
+          <FormattedMessage
+            id="stars_forks_update"
+            defaultMessage="The stars and forks update automatically every two minutes."
           />
         </div>
       </div>

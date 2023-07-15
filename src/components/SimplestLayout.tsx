@@ -5,7 +5,7 @@ type SimplestLayoutProps = {
 const SimplestLayout: React.FC<SimplestLayoutProps> = ({ children }) => {
   return (
     <div className="flex justify-center">
-      <div className="prose flex flex-grow items-end justify-end dark:prose-invert">
+      <div className="flex flex-grow items-end justify-end ">
         <main className="xs:max-w-sm mx-auto  max-w-xs  self-end px-1 sm:max-w-lg md:max-w-xl lg:max-w-2xl xl:max-w-3xl">
           {children}
         </main>
