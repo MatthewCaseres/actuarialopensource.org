@@ -6,7 +6,9 @@ type TableState = {
   starsDescending: boolean
   forksDescending: boolean
   languages: Record<string, boolean>
+  languagesFresh: boolean
   categories: Record<string, boolean>
+  categoriesFresh: boolean
   startingRows: FlatQuery[]
   activeRows: FlatQuery[]
 }
@@ -20,10 +22,12 @@ function initializeTableState(rows: FlatQuery[]): TableState {
       acc[row.language] = false
       return acc
     }, {}),
+    languagesFresh: true,
     categories: rows.reduce((acc, row) => {
       acc[row.category] = false
       return acc
     }, {}),
+    categoriesFresh: true,
     startingRows: sortedRows,
     activeRows: sortedRows,
   }
@@ -59,30 +63,23 @@ const tableReducer: Reducer<TableState, Action> = produce(
     }
     if (action.type === 'toggleLanguage') {
       table.languages[action.toggled] = !table.languages[action.toggled]
-      table.activeRows = filterRows(
-        table.startingRows,
-        table.languages,
-        table.categories
-      )
+      table.languagesFresh = false
+      table.activeRows = filterRows(table)
     }
     if (action.type === 'toggleCategory') {
       table.categories[action.toggled] = !table.categories[action.toggled]
-      table.activeRows = filterRows(
-        table.startingRows,
-        table.languages,
-        table.categories
-      )
+      table.categoriesFresh = false
+      table.activeRows = filterRows(table)
     }
   }
 )
 
-function filterRows(
-  rows: FlatQuery[],
-  languages: Record<string, boolean>,
-  categories: Record<string, boolean>
-) {
-  return rows.filter(
-    (row) => languages[row.language] || categories[row.category]
+function filterRows(tableState: TableState): FlatQuery[] {
+  const ts = tableState
+  return ts.startingRows.filter(
+    (row) =>
+      (ts.languagesFresh || ts.languages[row.language]) &&
+      (ts.categoriesFresh || ts.categories[row.category])
   )
 }
 

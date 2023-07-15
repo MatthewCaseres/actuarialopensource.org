@@ -10,6 +10,7 @@
   },
   "browserslist": "defaults, not ie <= 11",
   "dependencies": {
+    "@floating-ui/react": "^0.24.8",
     "@headlessui/react": "^1.7.0",
     "@heroicons/react": "^2.0.18",
     "@mapbox/rehype-prism": "^0.7.0",
@@ -37,7 +38,6 @@
     "react-dom": "^18.2.0",
     "react-icons": "^4.4.0",
     "react-intl": "^6.4.4",
-    "react-popper": "^2.3.0",
     "react-py": "^1.8.5",
     "rehype-katex": "^6.0.2",
     "rehype-mathjax": "^4.0.2",

@@ -13,6 +13,7 @@ import { useTableDispatch, useTableState } from './TableContext'
 export default function Table() {
   const [repos, setRepos] = useState<FlatQuery[]>(repos2)
   const dispatch = useTableDispatch()
+  const table = useTableState()
   const {
     starsDescending,
     forksDescending,
@@ -22,14 +23,18 @@ export default function Table() {
     activeRows,
   } = useTableState()
   return (
-    <div className="relative overflow-x-auto ">
+    <div className="overflow-x-auto ">
       <table className="w-full text-left text-sm text-gray-500 dark:text-gray-400">
         <thead className="select-none bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
           <tr>
             <th scope="col" className="px-6 py-3">
               Repository
             </th>
-            <th scope="col" className="px-6 py-3">
+            <th
+              scope="col"
+              className="px-6 py-3"
+              onClick={() => console.log(table)}
+            >
               <Filter
                 {...{
                   label: 'LANGUAGE',

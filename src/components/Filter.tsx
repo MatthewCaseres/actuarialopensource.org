@@ -1,7 +1,7 @@
-import { Fragment } from 'react'
-import { ChevronDownIcon, FunnelIcon } from '@heroicons/react/20/solid'
-import { Popover } from '@headlessui/react'
-import { useTableDispatch, useTableState } from './Table/TableContext'
+import React, { useState } from 'react'
+import { FunnelIcon } from '@heroicons/react/20/solid'
+import { useTableDispatch } from './Table/TableContext'
+import { Popover, PopoverTrigger, PopoverContent } from './Popover'
 
 type FilterType = 'toggleCategory' | 'toggleLanguage'
 
@@ -17,31 +17,37 @@ export default function Filter({
   filterType,
 }: FilterProps) {
   const dispatch = useTableDispatch()
+
   return (
-    <Popover className="relative">
-      <Popover.Button className="flex gap-x-1.5">
-        {label}
-        <FunnelIcon className=" h-5 w-5 text-gray-400" aria-hidden="true" />
-      </Popover.Button>
-
-      <Popover.Panel className="absolute z-10 ">
-        <div className="flex flex-col rounded border bg-white p-2">
-          {Object.keys(filterables).map((category) => (
-            <div
-              className="flex rounded p-1 hover:bg-gray-100"
-              onClick={() => {
-                dispatch({ type: filterType, toggled: category })
-              }}
-              key={category}
-            >
-              <input type="checkbox" checked={filterables[category]} />
-              <div className="ml-2 ">{category}</div>
-            </div>
-          ))}
-        </div>
-
-        <img src="/solutions.jpg" alt="" />
-      </Popover.Panel>
-    </Popover>
+    <div className="relative">
+      <Popover>
+        <PopoverTrigger asChild>
+          <button className="flex gap-x-1.5">
+            {label}
+            <FunnelIcon className=" h-5 w-5 text-gray-400" aria-hidden="true" />
+          </button>
+        </PopoverTrigger>
+        <PopoverContent>
+          <div className="flex flex-col rounded border bg-white p-2">
+            {Object.keys(filterables).map((category) => (
+              <div
+                className="flex rounded p-1 hover:bg-gray-100"
+                onClick={() => {
+                  dispatch({ type: filterType, toggled: category })
+                }}
+                key={category}
+              >
+                <input
+                  onChange={(e) => {}}
+                  type="checkbox"
+                  checked={filterables[category]}
+                />
+                <div className="ml-2">{category}</div>
+              </div>
+            ))}
+          </div>
+        </PopoverContent>
+      </Popover>
+    </div>
   )
 }
