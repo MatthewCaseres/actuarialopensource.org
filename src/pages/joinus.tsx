@@ -1,6 +1,6 @@
 import SimplestLayout from '@/components/SimplestLayout'
 import Table from '@/components/Table/Table'
-// import flatRepos from '../langs/q.json'
+import flatRepos from '../langs/q.json'
 import { TableProvider } from '@/components/Table/TableContext'
 import { useIntl, FormattedMessage } from 'react-intl'
 import { getReposFlat, reposConfig } from '@/lib/query'
@@ -18,11 +18,21 @@ export default function JoinUs({ flatRepos }) {
             id="add_here"
             defaultMessage="Add your project here"
           />
+          <br />
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://github.com/actuarialopensource/actuarialopensource.org/blob/main/src/lib/repos.config.ts"
+          >
+            github.com/actuarialopensource
+          </a>
         </div>
       </div>
-      <TableProvider rows={flatRepos}>
-        <Table />
-      </TableProvider>
+      <div className="mb-24">
+        <TableProvider rows={flatRepos}>
+          <Table />
+        </TableProvider>
+      </div>
     </SimplestLayout>
   )
 }
