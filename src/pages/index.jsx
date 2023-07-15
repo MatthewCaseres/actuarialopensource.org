@@ -12,16 +12,7 @@ import { useRouter } from 'next/router'
 import { IntlProvider } from 'react-intl'
 import { reposConfig } from '../lib/query'
 import { getReposFlat } from '../lib/query'
-import reposLol from '../langs/q.json'
-
-import enMessages from '../langs/en'
-import esMessages from '../langs/es'
-import cnMessages from '../langs/zh'
-import deMessages from '../langs/de'
-import frMessages from '../langs/fr'
-import jaMessages from '../langs/ja'
-import hiMessages from '../langs/hi'
-import ptMessages from '../langs/pt-br'
+import repos from '../langs/q.json'
 import { WhyOpenSource } from '../components/WhyOpenSource'
 
 export default function Home({ repos }) {
@@ -43,7 +34,7 @@ export default function Home({ repos }) {
       </Container>
       <Container className="mt-3">
         <ProjectGrid
-          repos={[...reposLol].sort((a, b) => b.stars - a.stars).splice(0, 6)}
+          repos={[...repos].sort((a, b) => b.stars - a.stars).splice(0, 6)}
         />
       </Container>
       <Container className="mt-5">
@@ -53,18 +44,18 @@ export default function Home({ repos }) {
   )
 }
 
-// export async function getStaticProps() {
-//   //   if (process.env.NODE_ENV === 'production') {
-//   //     await generateRssFeed()
-//   //   }
-//   // truncate to only have six repos from the repoConfig
-//   const repos = (
-//     await getReposFlat([...reposConfig].sort((a, b) => b.stars - a.stars))
-//   ).splice(0, 6)
-//   return {
-//     props: {
-//       repos: repos,
-//     },
-//     revalidate: 120,
-//   }
-// }
+export async function getStaticProps() {
+  //   if (process.env.NODE_ENV === 'production') {
+  //     await generateRssFeed()
+  //   }
+  // truncate to only have six repos from the repoConfig
+  const repos = (
+    await getReposFlat([...reposConfig].sort((a, b) => b.stars - a.stars))
+  ).splice(0, 6)
+  return {
+    props: {
+      repos: repos,
+    },
+    revalidate: 120,
+  }
+}

@@ -1,12 +1,11 @@
 import SimplestLayout from '@/components/SimplestLayout'
-import Link from 'next/link'
 import Table from '@/components/Table/Table'
-import Filter from '@/components/Table/Filter'
-import flatRepos from '../langs/q.json'
+// import flatRepos from '../langs/q.json'
 import { TableProvider } from '@/components/Table/TableContext'
 import { useIntl, FormattedMessage } from 'react-intl'
+import { getReposFlat, reposConfig } from '@/lib/query'
 
-export default function JoinUs() {
+export default function JoinUs({ flatRepos }) {
   const intl = useIntl()
   return (
     <SimplestLayout>
@@ -26,4 +25,20 @@ export default function JoinUs() {
       </TableProvider>
     </SimplestLayout>
   )
+}
+
+export async function getStaticProps() {
+  //   if (process.env.NODE_ENV === 'production') {
+  //     await generateRssFeed()
+  //   }
+  // truncate to only have six repos from the repoConfig
+  const flatRepos = (await getReposFlat(reposConfig)).sort(
+    (a, b) => b.stars - a.stars
+  )
+  return {
+    props: {
+      flatRepos,
+    },
+    revalidate: 60 * 60 * 3,
+  }
 }
