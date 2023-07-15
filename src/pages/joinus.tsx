@@ -1,6 +1,7 @@
 import SimplestLayout from '@/components/SimplestLayout'
 import Link from 'next/link'
 import Table from '@/components/Table'
+import Filter from '@/components/Filter'
 
 export default function JoinUs() {
   return (

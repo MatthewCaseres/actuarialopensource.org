@@ -3,6 +3,9 @@ import { useState } from 'react'
 import { FlatWithCategory } from '@/lib/query'
 import { StarIcon } from '@heroicons/react/24/outline'
 import { FunnelIcon } from '@heroicons/react/20/solid'
+import { Menu, Transition } from '@headlessui/react'
+import { ChevronDownIcon } from '@heroicons/react/20/solid'
+import Filter from './Filter'
 
 import { Lang } from './ProjectGrid'
 
@@ -17,8 +20,8 @@ export default function Table() {
               Repository
             </th>
             <th scope="col" className="flex flex-row items-end px-6 py-3">
-              <>Language</>
-              <FunnelIcon className="ml-1 rounded p-1 hover:bg-gray-200" />
+              <Filter {...{ label: 'LANGUAGE' }} />
+              {/* <FunnelIcon className="ml-1 rounded p-1 hover:bg-gray-200" /> */}
               <span className="hover:bg-slate-200"></span>
             </th>
             <th scope="col" className="px-6 py-3">
