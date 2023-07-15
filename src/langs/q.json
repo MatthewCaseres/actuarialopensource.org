@@ -1,25 +1,25 @@
 [
   {
-    "description": "Actuarial reserving in Python",
-    "forks": 60,
-    "stars": 143,
-    "name": "chainladder-python",
-    "language": "Python",
-    "color": "#3572A5",
-    "url": "https://github.com/casact/chainladder-python",
-    "category": "P&C",
-    "author": "casact"
+    "description": "Life Actuarial Maths",
+    "forks": 10,
+    "stars": 32,
+    "name": "LifeContingencies.jl",
+    "language": "Julia",
+    "color": "#a270ba",
+    "url": "https://github.com/JuliaActuary/LifeContingencies.jl",
+    "category": "Life",
+    "author": "JuliaActuary"
   },
   {
-    "description": "Loss modelling framework.",
-    "forks": 40,
-    "stars": 104,
-    "name": "OasisLMF",
-    "language": "Python",
-    "color": "#3572A5",
-    "url": "https://github.com/OasisLMF/OasisLMF",
-    "category": "P&C",
-    "author": "OasisLMF"
+    "description": "Hello!",
+    "forks": 3,
+    "stars": 22,
+    "name": "actuarialopensource.org",
+    "language": "MDX",
+    "color": "#fcb32c",
+    "url": "https://github.com/actuarialopensource/actuarialopensource.org",
+    "category": "Education",
+    "author": "actuarialopensource"
   },
   {
     "description": "A fully `Distributions.jl`-compliant copula package",
@@ -33,17 +33,6 @@
     "author": "lrnv"
   },
   {
-    "description": "Life Actuarial Maths",
-    "forks": 10,
-    "stars": 32,
-    "name": "LifeContingencies.jl",
-    "language": "Julia",
-    "color": "#a270ba",
-    "url": "https://github.com/JuliaActuary/LifeContingencies.jl",
-    "category": "Life",
-    "author": "JuliaActuary"
-  },
-  {
     "description": "Common functions in actuarial and financial routines",
     "forks": 8,
     "stars": 27,
@@ -55,14 +44,201 @@
     "author": "JuliaActuary"
   },
   {
-    "description": "Hello!",
-    "forks": 3,
-    "stars": 22,
-    "name": "actuarialopensource.org",
-    "language": "MDX",
-    "color": "#fcb32c",
-    "url": "https://github.com/actuarialopensource/actuarialopensource.org",
+    "description": "El objetivo de este repositorio es brindar un apoyo a la comunidad interesada en mejorar sus técnicas en el lenguaje de programación R o emprenderlo desde un punto de vista muy aplicado.  Un repositorio con códigos de R para aplicaciones actuariales: probabilidad, estadística, riesgo y finanzas.",
+    "forks": 13,
+    "stars": 70,
+    "name": "R_Actuarial",
+    "language": "R",
+    "color": "#198CE7",
+    "url": "https://github.com/A1arcon/R_Actuarial",
     "category": "Education",
+    "author": "A1arcon"
+  },
+  {
+    "description": "Loss Data Analytics is an interactive, online, freely available text. It provides core training on one of the foundations of actuarial science, loss data modeling. ",
+    "forks": 38,
+    "stars": 46,
+    "name": "Loss-Data-Analytics",
+    "language": "JavaScript",
+    "color": "#f1e05a",
+    "url": "https://github.com/OpenActTexts/Loss-Data-Analytics",
+    "category": "Education",
+    "author": "OpenActTexts"
+  },
+  {
+    "description": "Loss modelling framework.",
+    "forks": 40,
+    "stars": 104,
+    "name": "OasisLMF",
+    "language": "Python",
+    "color": "#3572A5",
+    "url": "https://github.com/OasisLMF/OasisLMF",
+    "category": "P&C",
+    "author": "OasisLMF"
+  },
+  {
+    "description": "Actuarial reserving in Python",
+    "forks": 60,
+    "stars": 143,
+    "name": "chainladder-python",
+    "language": "Python",
+    "color": "#3572A5",
+    "url": "https://github.com/casact/chainladder-python",
+    "category": "P&C",
+    "author": "casact"
+  },
+  {
+    "description": "Python package of actuarial models, tools, examples and learning materials.",
+    "forks": 34,
+    "stars": 112,
+    "name": "lifelib",
+    "language": "Jupyter Notebook",
+    "color": "#DA5B0B",
+    "url": "https://github.com/fumitoh/lifelib",
+    "category": "Life",
+    "author": "fumitoh"
+  },
+  {
+    "description": "Use Python like a spreadsheet!",
+    "forks": 14,
+    "stars": 69,
+    "name": "modelx",
+    "language": "Python",
+    "color": "#3572A5",
+    "url": "https://github.com/fumitoh/modelx",
+    "category": "General",
+    "author": "fumitoh"
+  },
+  {
+    "description": "Claims reserving models in R",
+    "forks": 61,
+    "stars": 70,
+    "name": "ChainLadder",
+    "language": "R",
+    "color": "#198CE7",
+    "url": "https://github.com/mages/ChainLadder",
+    "category": "P&C",
+    "author": "mages"
+  },
+  {
+    "description": "Actuarial functions and heavy tailed distributions for R",
+    "forks": 7,
+    "stars": 22,
+    "name": "actuar",
+    "language": "C",
+    "color": "#555555",
+    "url": "https://github.com/vigou3/actuar",
+    "category": "General",
+    "author": "vigou3"
+  },
+  {
+    "description": "Easily Reference and use Actuarial Mortality Tables",
+    "forks": 10,
+    "stars": 20,
+    "name": "MortalityTables.jl",
+    "language": "Julia",
+    "color": "#a270ba",
+    "url": "https://github.com/JuliaActuary/MortalityTables.jl",
+    "category": "Life",
+    "author": "JuliaActuary"
+  },
+  {
+    "description": "Stochastic Mortality Modelling",
+    "forks": 6,
+    "stars": 19,
+    "name": "StMoMo",
+    "language": "R",
+    "color": "#198CE7",
+    "url": "https://github.com/amvillegas/StMoMo",
+    "category": "Life",
+    "author": "amvillegas"
+  },
+  {
+    "description": "An open-source Python framework for actuarial cash flow models",
+    "forks": 4,
+    "stars": 10,
+    "name": "cashflower",
+    "language": "Python",
+    "color": "#3572A5",
+    "url": "https://github.com/acturtle/cashflower",
+    "category": "Life",
+    "author": "acturtle"
+  },
+  {
+    "description": "",
+    "forks": 3,
+    "stars": 10,
+    "name": "pymort",
+    "language": "Jupyter Notebook",
+    "color": "#DA5B0B",
+    "url": "https://github.com/actuarialopensource/pymort",
+    "category": "Life",
     "author": "actuarialopensource"
+  },
+  {
+    "description": "Create actuarial experience studies",
+    "forks": 2,
+    "stars": 10,
+    "name": "actxps",
+    "language": "R",
+    "color": "#198CE7",
+    "url": "https://github.com/mattheaphy/actxps/",
+    "category": "Life",
+    "author": "mattheaphy"
+  },
+  {
+    "description": "Some performance tests for actuarial applications",
+    "forks": 2,
+    "stars": 7,
+    "name": "benchmarks",
+    "language": "Python",
+    "color": "#3572A5",
+    "url": "https://github.com/actuarialopensource/benchmarks",
+    "category": "General",
+    "author": "actuarialopensource"
+  },
+  {
+    "description": "An R package, plumber API, database, and Shiny App for Actuarial Loss Development and Reserving Workflows.",
+    "forks": 1,
+    "stars": 7,
+    "name": "lossrx",
+    "language": "R",
+    "color": "#198CE7",
+    "url": "https://github.com/jimbrig/lossrx",
+    "category": "P&C",
+    "author": "jimbrig"
+  },
+  {
+    "description": "Tryangle is an automatic chainladder reserving framework. It provides scoring and optimisation methods based on machine learning techniques to automatically select optimal parameters to minimise reserve prediction error. ",
+    "forks": 4,
+    "stars": 11,
+    "name": "tryangle",
+    "language": "Python",
+    "color": "#3572A5",
+    "url": "https://github.com/casact/tryangle",
+    "category": "P&C",
+    "author": "casact"
+  },
+  {
+    "description": "Free Actuarial System for Loss Reserving",
+    "forks": 8,
+    "stars": 18,
+    "name": "FASLR",
+    "language": "Python",
+    "color": "#3572A5",
+    "url": "https://github.com/casact/FASLR",
+    "category": "P&C",
+    "author": "casact"
+  },
+  {
+    "description": "This repository holds the code behind riskyrouter.com which was the joint winner of the inaugural CAS Hacktuary Challenge in 2022.",
+    "forks": 0,
+    "stars": 6,
+    "name": "risky-router",
+    "language": "Python",
+    "color": "#3572A5",
+    "url": "https://github.com/casact/risky-router",
+    "category": "P&C",
+    "author": "casact"
   }
 ]

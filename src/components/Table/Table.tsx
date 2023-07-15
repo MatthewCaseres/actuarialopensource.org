@@ -1,13 +1,9 @@
 import repos2 from '../../langs/q.json'
 import { useState } from 'react'
 import { FlatQuery } from '@/lib/query'
-import { StarIcon } from '@heroicons/react/24/outline'
-import { FunnelIcon } from '@heroicons/react/20/solid'
-import { Menu, Transition } from '@headlessui/react'
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/20/solid'
-import Filter from '../Filter'
+import Filter from './Filter'
 
-import { Lang } from '../ProjectGrid'
 import { useTableDispatch, useTableState } from './TableContext'
 
 export default function Table() {
@@ -30,16 +26,13 @@ export default function Table() {
             <th scope="col" className="px-6 py-3">
               Repository
             </th>
-            <th
-              scope="col"
-              className="px-6 py-3"
-              onClick={() => console.log(table)}
-            >
+            <th scope="col" className="px-6 py-3">
               <Filter
                 {...{
                   label: 'LANGUAGE',
                   filterables: languages,
                   filterType: 'toggleLanguage',
+                  isFresh: table.languagesFresh,
                 }}
               />
             </th>
@@ -49,6 +42,7 @@ export default function Table() {
                   label: 'CATEGORY',
                   filterables: categories,
                   filterType: 'toggleCategory',
+                  isFresh: table.categoriesFresh,
                 }}
               />
             </th>

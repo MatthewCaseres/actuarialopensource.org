@@ -16,7 +16,7 @@ export type FlatQuery = {
 }
 
 /**The data we need to query a repo */
-type Repo = {
+export type Repo = {
   url: string
   category: 'Life' | 'P&C' | 'Health' | 'Finance' | 'Education' | 'General'
 }
@@ -110,6 +110,24 @@ function flattenQuery(query: QueryResult, repo: Repo): FlatQuery {
 
 export const reposConfig: Repo[] = [
   {
+    url: 'https://github.com/fumitoh/modelx',
+    category: 'General',
+  },
+  {
+    url: 'https://github.com/fumitoh/lifelib',
+    category: 'Life',
+  },
+  { url: 'https://github.com/mages/ChainLadder', category: 'P&C' },
+  {
+    url: 'https://github.com/casact/chainladder-python',
+    category: 'P&C',
+  },
+  {
+    url: 'https://github.com/OasisLMF/OasisLMF',
+    category: 'P&C',
+  },
+  { url: 'https://github.com/A1arcon/R_Actuarial', category: 'Education' },
+  {
     url: 'https://github.com/JuliaActuary/LifeContingencies.jl',
     category: 'Life',
   },
@@ -122,32 +140,11 @@ export const reposConfig: Repo[] = [
     url: 'https://github.com/JuliaActuary/ActuaryUtilities.jl',
     category: 'Finance',
   },
-  {
-    url: 'https://github.com/OasisLMF/OasisLMF',
-    category: 'P&C',
-  },
-  {
-    url: 'https://github.com/casact/chainladder-python',
-    category: 'P&C',
-  },
-  {
-    url: 'https://github.com/fumitoh/lifelib',
-    category: 'Life',
-  },
-  {
-    url: 'https://github.com/fumitoh/modelx',
-    category: 'General',
-  },
-  { url: 'https://github.com/mages/ChainLadder', category: 'P&C' },
   { url: 'https://github.com/vigou3/actuar', category: 'General' },
-  { url: 'https://github.com/A1arcon/R_Actuarial', category: 'Education' },
+
   {
     url: 'https://github.com/OpenActTexts/Loss-Data-Analytics',
     category: 'Education',
-  },
-  {
-    url: 'https://github.com/JuliaActuary/MortalityTables.jl',
-    category: 'Life',
   },
   {
     url: 'https://github.com/JuliaActuary/MortalityTables.jl',

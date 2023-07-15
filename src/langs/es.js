@@ -32,4 +32,6 @@ export default {
   quote6:
     'Microsoft estuvo del lado equivocado de la historia cuando explotó el código abierto a principios de siglo... La buena noticia es que, si la vida es lo suficientemente larga, puedes aprender que necesitas cambiar.',
   quote6_author: 'Brad Smith, presidente y vicepresidente de Microsoft',
+  all_projects: 'Todos los proyectos',
+  add_here: 'Añade tu proyecto aquí',
 }

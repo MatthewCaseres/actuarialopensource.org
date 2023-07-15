@@ -4,16 +4,6 @@ import Link from 'next/link'
 import { useIntl, FormattedMessage } from 'react-intl'
 import LanguageSelector from './LanguageSelector'
 
-const HeroButton: React.FC<{
-  title: string
-}> = ({ title }) => {
-  return (
-    <div className="mb-2 flex w-40 flex-row items-center justify-center border border-gray-300 p-2 shadow-md dark:border-gray-500">
-      {title}
-    </div>
-  )
-}
-
 export function Hero() {
   const intl = useIntl()
   return (
@@ -38,11 +28,6 @@ export function Hero() {
                 defaultMessage="A community of actuaries and developers building open source actuarial software."
               />
             </p>
-            <div className="mx-auto mt-10 flex flex-col items-center justify-center sm:flex-row sm:space-x-3 ">
-              <Link href="/joinus">
-                <HeroButton title={intl.formatMessage({ id: 'join_us' })} />
-              </Link>
-            </div>
             <LanguageSelector />
           </div>
         </main>

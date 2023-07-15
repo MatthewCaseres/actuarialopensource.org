@@ -2,6 +2,20 @@ import { StarIcon } from '@heroicons/react/24/outline'
 import { VscRepoForked } from 'react-icons/vsc'
 import { FlatQuery } from '@/lib/query'
 import { useIntl, FormattedMessage } from 'react-intl'
+import { reposConfig } from '../lib/query'
+import Link from 'next/link'
+
+export function LinkButton() {
+  return (
+    <div className="mx-auto mt-10 flex flex-col items-center justify-center sm:flex-row sm:space-x-3 ">
+      <Link href="/joinus">
+        <div className="mb-2 flex flex-row items-center justify-center border border-gray-300 p-2 shadow-md dark:border-gray-500">
+          <FormattedMessage id="all_projects" defaultMessage="All Projects" />
+        </div>
+      </Link>
+    </div>
+  )
+}
 
 export function Lang({ repo }) {
   return (
@@ -65,11 +79,8 @@ export function ProjectGrid({ repos }) {
               </li>
             ))}
         </ul>
-        <div className="px-5 pt-5 text-zinc-600 dark:text-zinc-400">
-          <FormattedMessage
-            id="stars_forks_update"
-            defaultMessage="The stars and forks update automatically every two minutes."
-          />
+        <div className=" text-zinc-600 dark:text-zinc-300">
+          <LinkButton />
         </div>
       </div>
     </div>

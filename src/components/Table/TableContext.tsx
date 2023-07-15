@@ -36,6 +36,7 @@ function initializeTableState(rows: FlatQuery[]): TableState {
 type Action =
   | { type: 'toggleStars' }
   | { type: 'toggleForks' }
+  | { type: 'resetFilters' }
   | { type: 'toggleLanguage'; toggled: string }
   | { type: 'toggleCategory'; toggled: string }
 
@@ -70,6 +71,19 @@ const tableReducer: Reducer<TableState, Action> = produce(
       table.categories[action.toggled] = !table.categories[action.toggled]
       table.categoriesFresh = false
       table.activeRows = filterRows(table)
+    }
+    if (action.type === 'resetFilters') {
+      table.languages = Object.keys(table.languages).reduce((acc, lang) => {
+        acc[lang] = false
+        return acc
+      }, {})
+      table.categories = Object.keys(table.categories).reduce((acc, cat) => {
+        acc[cat] = false
+        return acc
+      }, {})
+      table.languagesFresh = true
+      table.categoriesFresh = true
+      table.activeRows = table.startingRows
     }
   }
 )
@@ -115,42 +129,6 @@ function useTableDispatch() {
   return context
 }
 
-const flatRepos: FlatQuery[] = [
-  {
-    description: 'Actuarial reserving in Python',
-    forks: 60,
-    stars: 143,
-    name: 'chainladder-python',
-    language: 'Python',
-    color: '#3572A5',
-    url: 'https://github.com/casact/chainladder-python',
-    category: 'P&C',
-    author: 'casact',
-  },
-  {
-    description: 'A fully `Distributions.jl`-compliant copula package',
-    forks: 3,
-    stars: 43,
-    name: 'Copulas.jl',
-    language: 'Julia',
-    color: '#a270ba',
-    url: 'https://github.com/lrnv/Copulas.jl',
-    category: 'Finance',
-    author: 'lrnv',
-  },
-  {
-    description: 'Loss modelling framework.',
-    forks: 40,
-    stars: 104,
-    name: 'OasisLMF',
-    language: 'Python',
-    color: '#3572A5',
-    url: 'https://github.com/OasisLMF/OasisLMF',
-    category: 'P&C',
-    author: 'OasisLMF',
-  },
-]
-
 function sortRowsStarsFirst(
   rows: FlatQuery[],
   starsDescending: boolean,
@@ -193,4 +171,4 @@ function sortRowsForksFirst(
   })
 }
 
-export { TableProvider, useTableDispatch, useTableState, flatRepos }
+export { TableProvider, useTableDispatch, useTableState }
