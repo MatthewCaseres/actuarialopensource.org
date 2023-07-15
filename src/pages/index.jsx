@@ -49,6 +49,13 @@ export default function Home({ repos }) {
           />
         </Head>
         <Hero />
+        <div
+          onClick={() => {
+            console.log(repos)
+          }}
+        >
+          lol
+        </div>
         <Container className="mt-5">
           <WhyOpenSource />
         </Container>

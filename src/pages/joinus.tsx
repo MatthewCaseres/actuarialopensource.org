@@ -1,7 +1,8 @@
 import SimplestLayout from '@/components/SimplestLayout'
 import Link from 'next/link'
-import Table from '@/components/Table'
+import Table from '@/components/Table/Table'
 import Filter from '@/components/Filter'
+import { flatRepos, TableProvider } from '@/components/Table/TableContext'
 
 export default function JoinUs() {
   return (
@@ -28,7 +29,9 @@ export default function JoinUs() {
           Many people are doing interesting work.
         </div>
       </div>
-      <Table />
+      <TableProvider rows={flatRepos}>
+        <Table />
+      </TableProvider>
     </SimplestLayout>
   )
 }

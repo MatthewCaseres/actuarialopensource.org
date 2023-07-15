@@ -4,59 +4,65 @@
     "forks": 60,
     "stars": 143,
     "name": "chainladder-python",
-    "url": "https://github.com/casact/chainladder-python",
     "language": "Python",
     "color": "#3572A5",
-    "category": "P&C"
+    "url": "https://github.com/casact/chainladder-python",
+    "category": "P&C",
+    "author": "casact"
   },
   {
     "description": "Loss modelling framework.",
     "forks": 40,
     "stars": 104,
     "name": "OasisLMF",
-    "url": "https://github.com/OasisLMF/OasisLMF",
     "language": "Python",
     "color": "#3572A5",
-    "category": "P&C"
+    "url": "https://github.com/OasisLMF/OasisLMF",
+    "category": "P&C",
+    "author": "OasisLMF"
   },
   {
     "description": "A fully `Distributions.jl`-compliant copula package",
     "forks": 3,
     "stars": 43,
     "name": "Copulas.jl",
-    "url": "https://github.com/lrnv/Copulas.jl",
     "language": "Julia",
     "color": "#a270ba",
-    "category": "Finance"
+    "url": "https://github.com/lrnv/Copulas.jl",
+    "category": "Finance",
+    "author": "lrnv"
   },
   {
     "description": "Life Actuarial Maths",
     "forks": 10,
     "stars": 32,
     "name": "LifeContingencies.jl",
-    "url": "https://github.com/JuliaActuary/LifeContingencies.jl",
     "language": "Julia",
     "color": "#a270ba",
-    "category": "Life"
+    "url": "https://github.com/JuliaActuary/LifeContingencies.jl",
+    "category": "Life",
+    "author": "JuliaActuary"
   },
   {
     "description": "Common functions in actuarial and financial routines",
     "forks": 8,
     "stars": 27,
     "name": "ActuaryUtilities.jl",
-    "url": "https://github.com/JuliaActuary/ActuaryUtilities.jl",
     "language": "Julia",
     "color": "#a270ba",
-    "category": "Finance"
+    "url": "https://github.com/JuliaActuary/ActuaryUtilities.jl",
+    "category": "Finance",
+    "author": "JuliaActuary"
   },
   {
     "description": "Hello!",
     "forks": 3,
     "stars": 22,
     "name": "actuarialopensource.org",
-    "url": "https://github.com/actuarialopensource/actuarialopensource.org",
     "language": "MDX",
     "color": "#fcb32c",
-    "category": "Education"
+    "url": "https://github.com/actuarialopensource/actuarialopensource.org",
+    "category": "Education",
+    "author": "actuarialopensource"
   }
 ]

@@ -2,6 +2,32 @@ import gitUrlParse from 'git-url-parse'
 import { Octokit } from 'octokit'
 import { z } from 'zod'
 
+/**All of the data available for a repo */
+export type FlatQuery = {
+  author: string
+  description: string | null
+  forks: number
+  stars: number
+  name: string
+  language: string
+  color: string
+  url: string
+  category: string
+}
+
+/**The data we need to query a repo */
+type Repo = {
+  url: string
+  category: 'Life' | 'P&C' | 'Health' | 'Finance' | 'Education' | 'General'
+}
+
+/**Get all of the data for a repo */
+export async function getReposFlat(repos: Repo[]): Promise<FlatQuery[]> {
+  return Promise.all(repos.map(getRepoInfo))
+}
+
+// Helper functions
+
 const queryResultSchema = z.object({
   repository: z.object({
     description: z.string().nullable(),
@@ -16,7 +42,6 @@ const queryResultSchema = z.object({
       color: z.string(),
     }),
     name: z.string(),
-    url: z.string(),
   }),
   // rateLimit: z.object({
   //   cost: z.number(),
@@ -24,15 +49,14 @@ const queryResultSchema = z.object({
   // }),
 })
 
-export type QueryResult = z.infer<typeof queryResultSchema>
+type QueryResult = z.infer<typeof queryResultSchema>
 
 export function getOwnerRepoFromUrl(url: string) {
-  console.log(url)
   const parsed = gitUrlParse(url)
   return { owner: parsed.owner, repo: parsed.name }
 }
-async function getRepoInfo(url: string): Promise<QueryResult> {
-  const { owner, repo } = getOwnerRepoFromUrl(url)
+async function getRepoInfo(repoConfig: Repo): Promise<FlatQuery> {
+  const { owner, repo } = getOwnerRepoFromUrl(repoConfig.url)
   const octokit = new Octokit({
     auth: process.env.GH_TOKEN,
   })
@@ -53,13 +77,7 @@ async function getRepoInfo(url: string): Promise<QueryResult> {
           primaryLanguage {
             name
             color
-    	}
-        }
-        rateLimit {
-          limit
-          cost
-          remaining
-          resetAt
+    	    }
         }
       }
     `,
@@ -72,48 +90,22 @@ async function getRepoInfo(url: string): Promise<QueryResult> {
       }
     )
   )
-  return repoInfo
+  return flattenQuery(repoInfo, repoConfig)
 }
 
-export type FlatQuery = {
-  description: string | null
-  forks: number
-  stars: number
-  name: string
-  language: string
-  color: string
-  url: string
-}
-
-function flattenQuery(query: QueryResult): FlatQuery {
+function flattenQuery(query: QueryResult, repo: Repo): FlatQuery {
+  const { owner } = getOwnerRepoFromUrl(repo.url)
   return {
-    description: query.repository.description ?? '',
+    description: query.repository.description ?? '', // from the query
     forks: query.repository.forks.totalCount,
     stars: query.repository.stargazers.totalCount,
     name: query.repository.name,
-    url: query.repository.url,
     language: query.repository.primaryLanguage.name,
     color: query.repository.primaryLanguage.color,
+    url: repo.url, // from the config
+    category: repo.category,
+    author: owner,
   }
-}
-
-export type FlatWithCategory = FlatQuery & {
-  category: string
-}
-
-async function getReposRaw(urls: string[]) {
-  return Promise.all(urls.map(getRepoInfo))
-}
-
-export async function getReposFlat(repos: Repo[]): Promise<FlatWithCategory[]> {
-  const raw = await getReposRaw(repos.map((x) => x.url))
-  const flat = raw.map(flattenQuery)
-  return flat.map((x, i) => ({ ...x, category: repos[i].category }))
-}
-
-type Repo = {
-  url: string
-  category: 'Life' | 'P&C' | 'Health' | 'Finance' | 'Education' | 'General'
 }
 
 export const reposConfig: Repo[] = [
