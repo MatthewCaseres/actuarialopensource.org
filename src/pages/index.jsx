@@ -1,22 +1,19 @@
 import Head from 'next/head'
-import Link from 'next/link'
-import clsx from 'clsx'
-
 import { Container } from '@/components/Container'
 import { Quotes } from '../components/Quotes'
 import { Hero } from '../components/Hero'
-// import { generateRssFeed } from '@/lib/generateRssFeed'
-
 import { ProjectGrid } from '@/components/ProjectGrid'
-import { useRouter } from 'next/router'
-import { IntlProvider } from 'react-intl'
 import { reposConfig } from '../lib/query'
 import { getReposFlat } from '../lib/query'
-import repos from '../langs/q.json'
+import repos from '../cached_responses/q.json'
 import { WhyOpenSource } from '../components/WhyOpenSource'
 import HeadLine from '../components/HeadLine'
 
-export default function Home({ repos }) {
+export default function Home(
+  {
+    // repos
+  }
+) {
   return (
     <>
       <Head>
@@ -35,7 +32,7 @@ export default function Home({ repos }) {
           <WhyOpenSource />
         </HeadLine>
       </Container>
-      <Container className="mt-3">
+      <Container>
         <HeadLine headline_id="open_source_by_actuaries">
           <ProjectGrid
             repos={[...repos].sort((a, b) => b.stars - a.stars).splice(0, 6)}
@@ -52,18 +49,18 @@ export default function Home({ repos }) {
   )
 }
 
-export async function getStaticProps() {
-  //   if (process.env.NODE_ENV === 'production') {
-  //     await generateRssFeed()
-  //   }
-  // truncate to only have six repos from the repoConfig
-  const repos = (
-    await getReposFlat([...reposConfig].sort((a, b) => b.stars - a.stars))
-  ).splice(0, 6)
-  return {
-    props: {
-      repos: repos,
-    },
-    revalidate: 120,
-  }
-}
+// export async function getStaticProps() {
+//   //   if (process.env.NODE_ENV === 'production') {
+//   //     await generateRssFeed()
+//   //   }
+//   // truncate to only have six repos from the repoConfig
+//   const repos = (
+//     await getReposFlat([...reposConfig].sort((a, b) => b.stars - a.stars))
+//   ).splice(0, 6)
+//   return {
+//     props: {
+//       repos: repos,
+//     },
+//     revalidate: 120,
+//   }
+// }

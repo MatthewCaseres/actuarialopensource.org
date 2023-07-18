@@ -1,3 +1,5 @@
+// This page is for development only
+
 import React from 'react'
 import SidebarLayout from '@/components/Sidebar/SidebarLayout'
 import dynamic from 'next/dynamic'

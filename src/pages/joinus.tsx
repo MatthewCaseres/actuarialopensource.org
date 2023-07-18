@@ -1,6 +1,6 @@
 import SimplestLayout from '@/components/SimplestLayout'
 import Table from '@/components/Table/Table'
-import flatRepos from '../langs/q.json'
+import flatRepos from '../cached_responses/q.json'
 import { TableProvider } from '@/components/Table/TableContext'
 import { useIntl, FormattedMessage } from 'react-intl'
 import { getReposFlat, reposConfig } from '@/lib/query'

@@ -1,13 +1,9 @@
-import repos2 from '../../langs/q.json'
-import { useState } from 'react'
-import { FlatQuery } from '@/lib/query'
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/20/solid'
 import Filter from './Filter'
 
 import { useTableDispatch, useTableState } from './TableContext'
 
 export default function Table() {
-  const [repos, setRepos] = useState<FlatQuery[]>(repos2)
   const dispatch = useTableDispatch()
   const table = useTableState()
   const {
