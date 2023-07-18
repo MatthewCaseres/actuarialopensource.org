@@ -5,9 +5,9 @@ import Link from 'next/link'
 
 export function LinkButton() {
   return (
-    <div className="mx-auto mt-10 flex flex-col items-center justify-center sm:flex-row sm:space-x-3 ">
+    <div className="mx-auto mt-10 flex justify-center ">
       <Link href="/joinus">
-        <div className="mb-2 flex flex-row items-center justify-center border border-gray-300 p-2 shadow-md dark:border-gray-500">
+        <div className="rounded border  px-4 py-2 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200">
           <FormattedMessage id="all_projects" defaultMessage="All Projects" />
         </div>
       </Link>
