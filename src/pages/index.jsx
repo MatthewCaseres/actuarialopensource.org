@@ -9,11 +9,7 @@ import repos from '../cached_responses/q.json'
 import { WhyOpenSource } from '../components/WhyOpenSource'
 import HeadLine from '../components/HeadLine'
 
-export default function Home(
-  {
-    // repos
-  }
-) {
+export default function Home({ repos }) {
   return (
     <>
       <Head>
@@ -49,18 +45,18 @@ export default function Home(
   )
 }
 
-// export async function getStaticProps() {
-//   //   if (process.env.NODE_ENV === 'production') {
-//   //     await generateRssFeed()
-//   //   }
-//   // truncate to only have six repos from the repoConfig
-//   const repos = (
-//     await getReposFlat([...reposConfig].sort((a, b) => b.stars - a.stars))
-//   ).splice(0, 6)
-//   return {
-//     props: {
-//       repos: repos,
-//     },
-//     revalidate: 120,
-//   }
-// }
+export async function getStaticProps() {
+  //   if (process.env.NODE_ENV === 'production') {
+  //     await generateRssFeed()
+  //   }
+  // truncate to only have six repos from the repoConfig
+  const repos = (
+    await getReposFlat([...reposConfig].sort((a, b) => b.stars - a.stars))
+  ).splice(0, 6)
+  return {
+    props: {
+      repos: repos,
+    },
+    revalidate: 120,
+  }
+}
