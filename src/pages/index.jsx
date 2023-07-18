@@ -14,6 +14,7 @@ import { reposConfig } from '../lib/query'
 import { getReposFlat } from '../lib/query'
 import repos from '../langs/q.json'
 import { WhyOpenSource } from '../components/WhyOpenSource'
+import HeadLine from '../components/HeadLine'
 
 export default function Home({ repos }) {
   return (
@@ -30,15 +31,22 @@ export default function Home({ repos }) {
         <Hero />
       </div>
       <Container className="mt-5">
-        <WhyOpenSource />
+        <HeadLine headline_id="why?">
+          <WhyOpenSource />
+        </HeadLine>
       </Container>
       <Container className="mt-3">
-        <ProjectGrid
-          repos={[...repos].sort((a, b) => b.stars - a.stars).splice(0, 6)}
-        />
+        <HeadLine headline_id="open_source_by_actuaries">
+          <ProjectGrid
+            repos={[...repos].sort((a, b) => b.stars - a.stars).splice(0, 6)}
+          />
+        </HeadLine>
+        {/* "open_source_by_actuaries" */}
       </Container>
       <Container className="mt-5">
-        <Quotes />
+        <HeadLine headline_id="what_people_say">
+          <Quotes />
+        </HeadLine>
       </Container>
     </>
   )
