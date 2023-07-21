@@ -162,4 +162,8 @@ export const reposConfig: Repo[] = [
   { url: 'https://github.com/casact/tryangle', category: 'P&C' },
   { url: 'https://github.com/casact/FASLR', category: 'P&C' },
   { url: 'https://github.com/casact/risky-router', category: 'P&C' },
+  { url: 'https://github.com/genedan/MIES', category: 'Finance'},
+  { url: 'https://github.com/casact/PCDM', category: 'P&C'},
+  {url: 'https://github.com/genedan/TmVal', category: 'Finance'},
+  {url: 'https://github.com/genedan/actuarial-foss', category: 'Education'}
 ]

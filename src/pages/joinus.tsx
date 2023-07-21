@@ -22,7 +22,7 @@ export default function JoinUs({ flatRepos }) {
           <a
             target="_blank"
             rel="noopener noreferrer"
-            href="https://github.com/actuarialopensource/actuarialopensource.org/blob/main/src/lib/repos.config.ts"
+            href="https://github.com/actuarialopensource/actuarialopensource.org/blob/main/src/lib/query.ts#L124"
           >
             github.com/actuarialopensource
           </a>
