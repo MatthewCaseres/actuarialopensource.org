@@ -6,11 +6,15 @@ import Link from 'next/link'
 export function LinkButton() {
   return (
     <div className="mx-auto mt-10 flex justify-center ">
-      <Link href="/joinus">
+      <a
+          href="https://www.linkedin.com/groups/13937070/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
         <div className="rounded border  px-4 py-2 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200">
-          <FormattedMessage id="all_projects" defaultMessage="All Projects" />
+          <FormattedMessage id="join_us" defaultMessage="Join Us" />
         </div>
-      </Link>
+        </a>
     </div>
   )
 }
@@ -70,9 +74,9 @@ export function ProjectGrid({ repos }) {
             </li>
           ))}
       </ul>
-      {/* <div className=" text-zinc-600 dark:text-zinc-300">
+      <div className=" text-zinc-600 dark:text-zinc-300">
         <LinkButton />
-      </div> */}
+      </div>
     </div>
   )
 }
