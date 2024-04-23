@@ -70,9 +70,9 @@ export function ProjectGrid({ repos }) {
             </li>
           ))}
       </ul>
-      <div className=" text-zinc-600 dark:text-zinc-300">
+      {/* <div className=" text-zinc-600 dark:text-zinc-300">
         <LinkButton />
-      </div>
+      </div> */}
     </div>
   )
 }

@@ -28,9 +28,14 @@ yarn-error.log*
 
 # local env files
 .env*.local
+.env
 
 # vercel
 .vercel
 
 # generated files
 /public/rss/
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/

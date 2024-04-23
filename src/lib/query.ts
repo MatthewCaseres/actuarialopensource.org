@@ -40,7 +40,7 @@ const queryResultSchema = z.object({
     primaryLanguage: z.object({
       name: z.string(),
       color: z.string(),
-    }),
+    }).nullable(),
     name: z.string(),
   }),
   // rateLimit: z.object({
@@ -55,7 +55,8 @@ export function getOwnerRepoFromUrl(url: string) {
   const parsed = gitUrlParse(url)
   return { owner: parsed.owner, repo: parsed.name }
 }
-async function getRepoInfo(repoConfig: Repo): Promise<FlatQuery> {
+
+export async function getRepoInfo(repoConfig: Repo): Promise<FlatQuery> {
   const { owner, repo } = getOwnerRepoFromUrl(repoConfig.url)
   const octokit = new Octokit({
     auth: process.env.GH_TOKEN,
@@ -100,8 +101,8 @@ function flattenQuery(query: QueryResult, repo: Repo): FlatQuery {
     forks: query.repository.forks.totalCount,
     stars: query.repository.stargazers.totalCount,
     name: query.repository.name,
-    language: query.repository.primaryLanguage.name,
-    color: query.repository.primaryLanguage.color,
+    language: query.repository.primaryLanguage?.name ?? '',
+    color: query.repository.primaryLanguage?.color ?? '',
     url: repo.url, // from the config
     category: repo.category,
     author: owner,
@@ -109,10 +110,6 @@ function flattenQuery(query: QueryResult, repo: Repo): FlatQuery {
 }
 
 export const reposConfig: Repo[] = [
-  {
-    url: 'https://github.com/fumitoh/modelx',
-    category: 'General',
-  },
   {
     url: 'https://github.com/fumitoh/lifelib',
     category: 'Life',
@@ -126,44 +123,18 @@ export const reposConfig: Repo[] = [
     url: 'https://github.com/OasisLMF/OasisLMF',
     category: 'P&C',
   },
+  {
+    url: 'https://github.com/mynl/aggregate',
+    category: 'P&C',
+  },
   { url: 'https://github.com/A1arcon/R_Actuarial', category: 'Education' },
   {
     url: 'https://github.com/JuliaActuary/LifeContingencies.jl',
     category: 'Life',
   },
-  {
-    url: 'https://github.com/actuarialopensource/actuarialopensource.org',
-    category: 'Education',
-  },
   { url: 'https://github.com/lrnv/Copulas.jl', category: 'Finance' },
-  {
-    url: 'https://github.com/JuliaActuary/ActuaryUtilities.jl',
-    category: 'Finance',
-  },
-  { url: 'https://github.com/vigou3/actuar', category: 'General' },
-
   {
     url: 'https://github.com/OpenActTexts/Loss-Data-Analytics',
     category: 'Education',
   },
-  {
-    url: 'https://github.com/JuliaActuary/MortalityTables.jl',
-    category: 'Life',
-  },
-  { url: 'https://github.com/amvillegas/StMoMo', category: 'Life' },
-  { url: 'https://github.com/acturtle/cashflower', category: 'Life' },
-  { url: 'https://github.com/actuarialopensource/pymort', category: 'Life' },
-  { url: 'https://github.com/mattheaphy/actxps/', category: 'Life' },
-  {
-    url: 'https://github.com/actuarialopensource/benchmarks',
-    category: 'General',
-  },
-  { url: 'https://github.com/jimbrig/lossrx', category: 'P&C' },
-  { url: 'https://github.com/casact/tryangle', category: 'P&C' },
-  { url: 'https://github.com/casact/FASLR', category: 'P&C' },
-  { url: 'https://github.com/casact/risky-router', category: 'P&C' },
-  { url: 'https://github.com/genedan/MIES', category: 'Finance'},
-  { url: 'https://github.com/casact/PCDM', category: 'P&C'},
-  {url: 'https://github.com/genedan/TmVal', category: 'Finance'},
-  {url: 'https://github.com/genedan/actuarial-foss', category: 'Education'}
 ]
