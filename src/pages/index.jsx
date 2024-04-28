@@ -1,17 +1,15 @@
 import Head from 'next/head'
-import { Container } from '@/components/Container'
+import { Container } from '../components/Container'
 import { Quotes } from '../components/Quotes'
 import { Hero } from '../components/Hero'
-import { ProjectGrid } from '@/components/ProjectGrid'
+import { ProjectGrid } from '../components/ProjectGrid'
 import { reposConfig } from '../lib/query'
 import { getReposFlat } from '../lib/query'
 import repos from '../cached_responses/q.json'
 import { WhyOpenSource } from '../components/WhyOpenSource'
 import HeadLine from '../components/HeadLine'
 
-export default function Home({ 
-  repos
- }) {
+export default function Home({ repos }) {
   return (
     <>
       <Head>
@@ -32,9 +30,7 @@ export default function Home({
       </Container>
       <Container>
         <HeadLine headline_id="open_source_by_actuaries">
-          <ProjectGrid
-            repos={repos}
-          />
+          <ProjectGrid repos={repos} />
         </HeadLine>
         {/* "open_source_by_actuaries" */}
       </Container>
@@ -52,8 +48,8 @@ export async function getStaticProps() {
   //     await generateRssFeed()
   //   }
   // truncate to only have six repos from the repoConfig
-  const repos = (
-    await getReposFlat([...reposConfig].sort((a, b) => b.stars - a.stars))
+  const repos = await getReposFlat(
+    [...reposConfig].sort((a, b) => b.stars - a.stars)
   )
   return {
     props: {

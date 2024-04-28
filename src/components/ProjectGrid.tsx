@@ -3,16 +3,22 @@ import { VscRepoForked } from 'react-icons/vsc'
 import { useIntl, FormattedMessage } from 'react-intl'
 import Link from 'next/link'
 
-export function LinkButton() {
+type LinkButtonProps = {
+  href: string
+  messageId: string
+}
+
+export function LinkButton({ href, messageId }: LinkButtonProps) {
   return (
-    <div className="mx-auto mt-10 flex justify-center ">
+    <div className="mx-auto mt-5 flex justify-center prose">
       <a
-          href="https://www.linkedin.com/groups/13937070/"
+          href={href}
+          title={messageId}
           target="_blank"
           rel="noopener noreferrer"
         >
         <div className="rounded border  px-4 py-2 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200">
-          <FormattedMessage id="join_us" defaultMessage="Join Us" />
+          <FormattedMessage id={messageId} />
         </div>
         </a>
     </div>
@@ -74,9 +80,7 @@ export function ProjectGrid({ repos }) {
             </li>
           ))}
       </ul>
-      <div className=" text-zinc-600 dark:text-zinc-300">
-        <LinkButton />
-      </div>
+        <LinkButton href='https://github.com/genedan/actuarial-foss' messageId='all_projects'/>
     </div>
   )
 }

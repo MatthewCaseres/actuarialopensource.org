@@ -34,4 +34,6 @@ export default {
   quote6_author: 'Brad Smith, Präsident und Vizevorsitzender von Microsoft',
   all_projects: 'Alle Projekte',
   add_here: 'Fügen Sie Ihr Projekt hier hinzu',
+  "recurse_python": "Hier ist ein einfaches rekursives Modellierungsframework für Lebensversicherungen in Python. Einfache Modellierungsframeworks wie dieses können in den richtigen Händen unglaublich leistungsfähig und flexibel sein.",
+  "share_world": "Hast du etwas, das du mit der Welt teilen möchtest?"
 }

@@ -35,7 +35,7 @@ export default function Controls(props: ControlProps) {
                 i === visibleItems.length - 1 && 'rounded-r-md'
               )}
             >
-              <item.icon className="h-5 w-5 text-white" aria-hidden="true" />
+              {item.icon}
             </button>
           ))}
         </span>

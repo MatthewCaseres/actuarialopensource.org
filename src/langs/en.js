@@ -35,4 +35,6 @@ export default {
   // Projects
   all_projects: 'All Projects',
   add_here: 'Add your project here',
+  recurse_python: 'Here is a simple recursive life insurance modeling framework in Python. Simple modeling frameworks like this can be incredibly powerful and flexible in the right hands.',
+  share_world: 'Do you have something you want to share with the world?'
 }

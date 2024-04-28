@@ -34,4 +34,6 @@ export default {
   quote6_author: 'Brad Smith, président et vice-président de Microsoft',
   all_projects: 'Tous les projets',
   add_here: 'Ajoutez votre projet ici',
+  "recurse_python": "Voici un cadre de modélisation récursive simple pour les assurances-vie en Python. Des cadres de modélisation simples comme celui-ci peuvent être incroyablement puissants et flexibles entre les bonnes mains.",
+  "share_world": "Avez-vous quelque chose que vous souhaitez partager avec le monde ?"
 }

@@ -30,4 +30,6 @@ export default {
   quote6_author: 'Microsoft的总裁和副主席 Brad Smith',
   all_projects: '所有项目',
   add_here: '在此处添加您的项目',
+  "recurse_python": "这里是一个简单的Python递归寿险建模框架。像这样的简单建模框架在合适的人手中可以非常强大和灵活。",
+  "share_world": "你有什么想与世界分享的吗？"
 }

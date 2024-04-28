@@ -34,4 +34,6 @@ export default {
   quote6_author: 'Brad Smith, presidente y vicepresidente de Microsoft',
   all_projects: 'Todos los proyectos',
   add_here: 'Añade tu proyecto aquí',
+  "recurse_python": "Aquí tienes un sencillo marco de modelado recursivo para seguros de vida en Python. Marcos de modelado simples como este pueden ser increíblemente poderosos y flexibles en las manos adecuadas.",
+  "share_world": "¿Tienes algo que quieras compartir con el mundo?"
 }
