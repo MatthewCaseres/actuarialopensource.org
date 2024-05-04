@@ -1,6 +1,5 @@
 import { useEffect, useRef } from 'react'
 
-import { Header } from '@/components/Header'
 import { LastEditorIdProvider } from '../components/CodeEditor/LastEditorContext'
 
 import { Analytics } from '@vercel/analytics/react'
@@ -53,7 +52,6 @@ export default function App({ Component, pageProps, router }) {
         </div>
       </div>
       <div className="relative">
-        <Header />
         <IntlProvider locale={locale} messages={allMessages[locale]}>
           <LastEditorIdProvider>
             <main>

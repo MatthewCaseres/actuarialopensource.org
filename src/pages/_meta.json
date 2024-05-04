@@ -1,0 +1,16 @@
+{
+    "index": {
+        "title": "LOL",
+        "display": "hidden",
+
+        "theme": {
+            "layout": "raw"
+        }
+    },
+    "contact": "Contact Us",
+    "about": "About Us",
+    "community": {
+        "title": "Community",
+        "type": "page"
+    }
+}

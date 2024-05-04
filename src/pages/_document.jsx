@@ -50,12 +50,6 @@ export default function Document() {
           type="application/feed+json"
           href={`${process.env.NEXT_PUBLIC_SITE_URL}/rss/feed.json`}
         />
-        <link
-          rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"
-          integrity="sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4rT9ZfRI7mLTdk1wblIUnrIq35nqwEvC"
-          crossOrigin="anonymous"
-        ></link>
       </Head>
       <body className="flex h-full flex-col bg-white dark:bg-black">
         <Main />
